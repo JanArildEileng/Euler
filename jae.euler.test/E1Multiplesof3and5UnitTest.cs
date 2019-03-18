@@ -4,7 +4,7 @@ using Xunit;
 
 namespace jae.euler.test
 {
-    public class Multiplesof3and5UnitTest
+    public class E1Multiplesof3and5UnitTest
 
     {
         [Fact]
@@ -27,7 +27,9 @@ namespace jae.euler.test
             var e1Multiplesof3and5 = new E1Multiplesof3and5();
             var sum = e1Multiplesof3and5.Sum(below: 1000);
             Assert.Equal(233168, sum);
-
+            // 233168
+            //Congratulations, the answer you gave to problem 1 is correct.
+            //You are the 833904th person to have solved this problem.
 
         }
 
