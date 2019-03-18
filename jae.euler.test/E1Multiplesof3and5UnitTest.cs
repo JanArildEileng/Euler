@@ -15,11 +15,22 @@ namespace jae.euler.test
             var sum = sut.Sum(below:10);
             Assert.Equal(23, sum);
 
-
             sum = sut.Sum(below: 1000);
             Console.WriteLine( $"Sum  = { sum}" );
 
 
         }
+
+        [Fact]
+        public void Solution()
+        {
+            var e1Multiplesof3and5 = new E1Multiplesof3and5();
+            var sum = e1Multiplesof3and5.Sum(below: 1000);
+            Assert.Equal(233168, sum);
+
+
+        }
+
+
     }
 }

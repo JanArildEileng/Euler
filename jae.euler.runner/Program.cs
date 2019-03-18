@@ -9,8 +9,22 @@ namespace jae.euler.runner
         {
             Console.WriteLine("Hello Euler!");
 
-            RunE1Multiplesof3and5();
+            NewMethod();
 
+        }
+
+        private static void NewMethod()
+        {
+            var sut = new E2EvenFibonaccinumbers();
+
+            var sum = sut.SumEven(below: 4000000);
+
+            Console.WriteLine($"E2EvenFibonaccinumbers Sum  = { sum}");
+            /*
+              4613732
+              Congratulations, the answer you gave to problem 2 is correct.
+              You are the 666663rd person to have solved this problem.
+            */
         }
 
         private static void RunE1Multiplesof3and5()
