@@ -7,7 +7,7 @@ using Xunit;
 
 namespace jae.euler.test.Palindrome
 {
-    public class PalindromeUnitTest
+    public class PrimeUnitTest
     {
 
         [Theory]
