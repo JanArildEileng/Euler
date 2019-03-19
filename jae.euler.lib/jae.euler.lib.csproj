@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\jae.euler.math\jae.euler.math.csproj" />
+  </ItemGroup>
+
 </Project>
