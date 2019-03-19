@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using jae.euler.lib.Primes;
+using jae.euler.math;
 
 namespace jae.euler.lib
 {
@@ -11,7 +11,7 @@ namespace jae.euler.lib
         public long  Largest(long below)
         {
 
-            List<long> primeList = PrimeList.GetList(below);
+            List<long> primeList = Primes.GetPrimeFactorsInNumber(below);
 
             return primeList.Max();
 

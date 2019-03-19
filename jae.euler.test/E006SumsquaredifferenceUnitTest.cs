@@ -4,7 +4,7 @@ using Xunit;
 
 namespace jae.euler.test
 {
-    public class E6SumsquaredifferenceUnitTest
+    public class E006SumsquaredifferenceUnitTest
     {
         [Fact]
         public void Test1()

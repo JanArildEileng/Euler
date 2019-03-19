@@ -6,7 +6,7 @@ using jae.euler.lib;
 
 namespace jae.euler.test
 {
-    public class E2EvenFibonaccinumbersUnitTest
+    public class E002EvenFibonaccinumbersUnitTest
     {
         [Fact]
         public void Test1()

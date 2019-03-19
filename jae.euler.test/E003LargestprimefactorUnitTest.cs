@@ -4,7 +4,7 @@ using Xunit;
 
 namespace jae.euler.test
 {
-    public class E3LargestprimefactorUnitTest
+    public class E003LargestprimefactorUnitTest
 
     {
         [Fact]

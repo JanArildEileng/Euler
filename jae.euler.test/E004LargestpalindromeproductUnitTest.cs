@@ -4,7 +4,7 @@ using Xunit;
 
 namespace jae.euler.test
 {
-    public class E4LargestpalindromeproductUnitTest
+    public class E004LargestpalindromeproductUnitTest
     {
         [Fact]
         public void Test1()

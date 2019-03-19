@@ -4,7 +4,7 @@ using Xunit;
 
 namespace jae.euler.test
 {
-    public class E1Multiplesof3and5UnitTest
+    public class E001Multiplesof3and5UnitTest
 
     {
         [Fact]

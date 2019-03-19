@@ -1,8 +1,9 @@
-﻿using jae.euler.lib.Primes;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using jae.euler.math;
 
 namespace jae.euler.lib
 {
@@ -15,7 +16,7 @@ namespace jae.euler.lib
 
             for (int i = 2; i <= UpToNumber; i++)
             {
-                var group = PrimeList.GetList(i).GroupBy(e => e);
+                var group = Primes.GetPrimeFactorsInNumber(i).GroupBy(e => e);
 
                 foreach(var g in group)
                 {

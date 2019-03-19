@@ -4,7 +4,7 @@ using Xunit;
 
 namespace jae.euler.test
 {
-    public class E8LargestproductinaseriesUnitTest
+    public class E008LargestproductinaseriesUnitTest
     {
 
         string testString = "73167176531330624919225119674426574742355349194934" +

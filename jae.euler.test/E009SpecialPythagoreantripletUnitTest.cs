@@ -4,7 +4,7 @@ using Xunit;
 
 namespace jae.euler.test
 {
-    public class E9SpecialPythagoreantripletUnitTest
+    public class E009SpecialPythagoreantripletUnitTest
     {
 
 
