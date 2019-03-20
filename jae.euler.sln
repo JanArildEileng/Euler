@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "jae.euler.lib", "jae.euler.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jae.euler.math", "jae.euler.math\jae.euler.math.csproj", "{B512BF13-ABFE-4CB5-B090-9D36F9D56030}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jae.euler.runner", "jae.euler.runner\jae.euler.runner.csproj", "{5D1462F4-8907-48ED-9E3A-2E9E24239D86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B512BF13-ABFE-4CB5-B090-9D36F9D56030}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B512BF13-ABFE-4CB5-B090-9D36F9D56030}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B512BF13-ABFE-4CB5-B090-9D36F9D56030}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D1462F4-8907-48ED-9E3A-2E9E24239D86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D1462F4-8907-48ED-9E3A-2E9E24239D86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D1462F4-8907-48ED-9E3A-2E9E24239D86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D1462F4-8907-48ED-9E3A-2E9E24239D86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
