@@ -19,29 +19,27 @@ namespace jae.euler.test
             var sut = new E012Highlydivisibletriangularnumber();
 
             long expected = 28;
-            var value = sut.GetFirstWithOver(divisors: 5);
+            var value = sut.GetFirstWithNumbersOfDivisors(above: 5);
             Assert.Equal(expected, value);
         }
 
         [Fact]
         public void Solution()
         {
-            /*
+             /*
                 What is the value of the first triangle number to have over five hundred divisors?   
              */
 
-
             var sut = new E012Highlydivisibletriangularnumber();
 
-            long expected = 28;
-            var value = sut.GetFirstWithOver(divisors: 30);
+            long expected = 76576500;
+            var value = sut.GetFirstWithNumbersOfDivisors(above: 500);
             Assert.Equal(expected, value);
 
-
             /*
-                Congratulations, the answer you gave to problem 11 is correct.
+               Congratulations, the answer you gave to problem 12 is correct.
 
-                You are the 207070th person to have solved this problem.
+            You are the 194197th person to have solved this problem.
             */
 
         }
