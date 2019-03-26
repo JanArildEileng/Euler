@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace jae.euler.lib
 {
-    public class E1Multiplesof3and5
+    public class E001Multiplesof3and5
     {
         public int Sum(int below)
         {

@@ -15,7 +15,7 @@ namespace jae.euler.test
              
              */
 
-            var sut = new E5Smallestmultiple();
+            var sut = new E005Smallestmultiple();
 
             var min = sut.SmallestNumberDividedByAllNumbers(10);
             Assert.Equal(2520, min);
@@ -31,7 +31,7 @@ namespace jae.euler.test
             */
 
 
-            var sut = new E5Smallestmultiple();
+            var sut = new E005Smallestmultiple();
 
             var min = sut.SmallestNumberDividedByAllNumbers(20);
             Assert.Equal(232792560, min);

@@ -7,7 +7,7 @@ using jae.euler.math;
 
 namespace jae.euler.lib
 {
-    public class E5Smallestmultiple
+    public class E005Smallestmultiple
     {
         public long SmallestNumberDividedByAllNumbers(long UpToNumber)
         {

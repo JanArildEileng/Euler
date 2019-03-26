@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace jae.euler.lib
 {
-    public class E8Largestproductinaseries
+    public class E008Largestproductinaseries
     {
         public long GetLagrestProduct(long nrSeq, string testString)
         {

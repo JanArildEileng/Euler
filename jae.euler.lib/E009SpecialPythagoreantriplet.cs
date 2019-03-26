@@ -5,7 +5,7 @@ using System.Text;
 
 namespace jae.euler.lib
 {
-    public class E9SpecialPythagoreantriplet
+    public class E009SpecialPythagoreantriplet
     {
         public long GetProductWhereSum(int sum)
         {

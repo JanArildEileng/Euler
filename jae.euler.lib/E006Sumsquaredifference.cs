@@ -4,7 +4,7 @@ using System.Text;
 
 namespace jae.euler.lib
 {
-    public class E6Sumsquaredifference
+    public class E006Sumsquaredifference
     {
         public long DifferenceBetweenTheSumOfSquares(long number)
         {

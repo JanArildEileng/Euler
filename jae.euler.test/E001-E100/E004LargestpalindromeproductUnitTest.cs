@@ -15,7 +15,7 @@ namespace jae.euler.test
 
             int below = 100 * 100;
 
-            var sut = new E4Largestpalindromeproduct();
+            var sut = new E004Largestpalindromeproduct();
 
             var max = sut.Largest(below,100);
             Assert.Equal(9009, max);
@@ -30,7 +30,7 @@ namespace jae.euler.test
             */
 
             int below = 1000 * 1000;
-            var sut = new E4Largestpalindromeproduct();
+            var sut = new E004Largestpalindromeproduct();
 
             var max = sut.Largest(below,1000);
             Assert.Equal(906609, max);

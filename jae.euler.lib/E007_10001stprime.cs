@@ -4,7 +4,7 @@ using System.Text;
 
 namespace jae.euler.lib
 {
-    public class E7_10001stprime
+    public class E007_10001stprime
     {
         public object GetPrimeNumber(long primenr)
         {

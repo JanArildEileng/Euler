@@ -13,7 +13,7 @@ namespace jae.euler.test
               By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.            
            */
 
-            var sut = new E7_10001stprime();
+            var sut = new E007_10001stprime();
 
             long expected = 13;
             var value = sut.GetPrimeNumber(6);
@@ -30,7 +30,7 @@ namespace jae.euler.test
        */
 
 
-            var sut = new E7_10001stprime();
+            var sut = new E007_10001stprime();
 
             long expected = 104743;
             var value = sut.GetPrimeNumber(10001);

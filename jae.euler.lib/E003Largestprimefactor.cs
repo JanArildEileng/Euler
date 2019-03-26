@@ -6,7 +6,7 @@ using jae.euler.math;
 
 namespace jae.euler.lib
 {
-    public class E3Largestprimefactor
+    public class E003Largestprimefactor
     {
         public long  Largest(long below)
         {

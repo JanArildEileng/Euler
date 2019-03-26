@@ -7,7 +7,7 @@ using jae.euler.lib.Palindrome;
 
 namespace jae.euler.lib
 {
-    public class E4Largestpalindromeproduct
+    public class E004Largestpalindromeproduct
     {
         public long Largest(long below,long maxFactor)
         {

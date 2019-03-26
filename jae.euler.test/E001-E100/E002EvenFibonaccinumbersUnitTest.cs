@@ -16,7 +16,7 @@ namespace jae.euler.test
             var sumTest = list.Where(e => e % 2 == 0).Sum();
             var max = list.Max()+1;
 
-            var sut = new E2EvenFibonaccinumbers();
+            var sut = new E002EvenFibonaccinumbers();
 
             var sum = sut.SumEven(below: max);
             Assert.Equal(sumTest, sum);
@@ -26,7 +26,7 @@ namespace jae.euler.test
         [Fact]
         public void Solution()
         {
-            var sut = new E2EvenFibonaccinumbers();
+            var sut = new E002EvenFibonaccinumbers();
             var sum = sut.SumEven(below: 4000000);
             Assert.Equal(4613732, sum);
             Console.WriteLine($"E2EvenFibonaccinumbers Sum  = { sum}");

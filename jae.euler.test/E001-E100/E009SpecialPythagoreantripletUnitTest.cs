@@ -15,7 +15,7 @@ namespace jae.euler.test
             A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,
            */
 
-            var sut = new E9SpecialPythagoreantriplet();
+            var sut = new E009SpecialPythagoreantriplet();
 
             long expected = 3*4*5;
             var value = sut.GetProductWhereSum(3+4+5);
@@ -30,7 +30,7 @@ namespace jae.euler.test
                 Find the product abc.
             */
 
-            var sut = new E9SpecialPythagoreantriplet();
+            var sut = new E009SpecialPythagoreantriplet();
 
             long expected = 31875000;
             var value = sut.GetProductWhereSum(1000);

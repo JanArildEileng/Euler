@@ -12,7 +12,7 @@ namespace jae.euler.test
         {
             // The prime factors of 13195 are 5, 7, 13 and 29.
 
-            var sut = new E3Largestprimefactor();
+            var sut = new E003Largestprimefactor();
 
             var max = sut.Largest(3);
             Assert.Equal(3, max);
@@ -37,7 +37,7 @@ namespace jae.euler.test
         [Fact]
         public void Solution()
         {
-            var sut = new E3Largestprimefactor();
+            var sut = new E003Largestprimefactor();
 
             var max = sut.Largest(600851475143);
             Assert.Equal(6857, max);

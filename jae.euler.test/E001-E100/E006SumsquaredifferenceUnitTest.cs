@@ -19,7 +19,7 @@ namespace jae.euler.test
              
              */
 
-            var sut = new E6Sumsquaredifference();
+            var sut = new E006Sumsquaredifference();
 
             var diff = sut.DifferenceBetweenTheSumOfSquares(10);
             Assert.Equal(2640, diff);
@@ -35,7 +35,7 @@ namespace jae.euler.test
             */
 
 
-            var sut = new E6Sumsquaredifference();
+            var sut = new E006Sumsquaredifference();
 
 
             var diff = sut.DifferenceBetweenTheSumOfSquares(100);

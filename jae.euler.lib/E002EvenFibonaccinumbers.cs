@@ -4,7 +4,7 @@ using jae.euler.lib.Extender;
 
 namespace jae.euler.lib
 {
-    public class E2EvenFibonaccinumbers
+    public class E002EvenFibonaccinumbers
     {
         public int SumEven(int below)
         {

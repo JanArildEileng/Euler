@@ -42,7 +42,7 @@ namespace jae.euler.test
 
            */
 
-            var sut = new E8Largestproductinaseries();
+            var sut = new E008Largestproductinaseries();
 
             long expected = 5832;
             var value = sut.GetLagrestProduct(4, testString);
@@ -60,7 +60,7 @@ namespace jae.euler.test
 
 
 
-            var sut = new E8Largestproductinaseries();
+            var sut = new E008Largestproductinaseries();
 
             long expected = 23514624000;
             var value = sut.GetLagrestProduct(13, testString);
