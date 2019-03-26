@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using jae.euler.lib.Digits;
 
 namespace jae.euler.lib
 {
@@ -16,7 +17,7 @@ namespace jae.euler.lib
             foreach (var s in stringArray.Skip(1))
             {
                 List<int> nextNumber = s.ToCharArray().Reverse().Select(c => Convert.ToInt32(c - '0')).ToList();
-                sumNumbers = Sum(nextNumber, sumNumbers);
+                sumNumbers = DigitsList.Sum(nextNumber, sumNumbers);
             }
 
             //lag string ut fra int array , snu tallene
@@ -27,24 +28,7 @@ namespace jae.euler.lib
 
         }
 
-        private List<int> Sum(List<int> numbers1, List<int> numbers2)
-        {
-            List<int> sum = new List<int>();
-            int rest = 0;
-            int i=0;
-            while(numbers1.Count > i || numbers2.Count > i || rest > 0) {
-                int s = rest;
-                s += numbers1.Count > i ? numbers1[i] : 0;
-                s += numbers2.Count > i ? numbers2[i] : 0;
-
-                sum.Add(s % 10);
-                rest = s / 10;
-                i++;
-            }
-
-            return sum;
-
-        }
+       
 
     }
 }
