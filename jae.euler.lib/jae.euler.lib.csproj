@@ -8,8 +8,4 @@
     <ProjectReference Include="..\jae.euler.math\jae.euler.math.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="E001-E100\" />
-  </ItemGroup>
-
 </Project>
