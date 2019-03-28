@@ -52,6 +52,13 @@ namespace jae.euler.math
         }
 
 
+        //    A number n is called called abundant if sum of its proper divisors exceeds n.
+        public static bool IsAbundantNumber(long number)
+        {
+            return ( GetProperDivisors(number).Sum() > number);
+        }
+
+
 
     }
 }

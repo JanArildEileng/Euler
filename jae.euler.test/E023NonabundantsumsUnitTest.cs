@@ -11,25 +11,43 @@ namespace jae.euler.test
         public void Test1()
         {
             /*
-              For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110;
-              therefore d(220) = 284. The proper divisors of 284 are 1, 2, 4, 71 and 142; so d(284) = 220.   
+              As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16,
+              the smallest number that can be written as the sum of two abundant numbers is 24. 
             */
-    
+
+            Assert.True(Divisors.IsAbundantNumber(12));
+
+            var sut = new E023Nonabundantsums();
+            long nonabundantsumExpected = 276;
+            long nonabundantsum = sut.GetNonabundantsum(to: 23);
+            Assert.Equal(nonabundantsumExpected, nonabundantsum);
+
+            //24 kan skrive som sum
+            nonabundantsum = sut.GetNonabundantsum(to: 24);
+            Assert.Equal(nonabundantsumExpected, nonabundantsum);
+
+
+
         }
 
         [Fact]
         public void Solution()
         {
             /*
-              Evaluate the sum of all the amicable numbers under 10000.
+              Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
             */
 
-          
+            var sut = new E023Nonabundantsums();
+            long nonabundantsumExpected =   4179871;
+            long nonabundantsum = sut.GetNonabundantsum(to: 28123);
+            Assert.Equal(nonabundantsumExpected, nonabundantsum);
+
+
 
             /*
-              Congratulations, the answer you gave to problem 21 is correct.
+            Congratulations, the answer you gave to problem 23 is correct.
 
-            You are the 128981st person to have solved this problem.
+            You are the 91494th person to have solved this problem.
             */
         }
     }
