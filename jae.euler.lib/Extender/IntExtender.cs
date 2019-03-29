@@ -11,5 +11,15 @@ namespace jae.euler.lib.Extender
             return a % 2 == 0;
         }
 
+
+        public static string StringFromArray(this int[] list)
+        {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < list.Length; i++)
+                builder.Append(list[i]);
+
+            return builder.ToString();
+        }
+
     }
 }
