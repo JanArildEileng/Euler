@@ -6,7 +6,11 @@ namespace jae.euler.lib.Extender
 {
     public static class IntExtender
     {
-        public static bool Even(this int a)
+        public static bool Even(this int a) 
+        {
+            return a % 2 == 0;
+        }
+        public static bool Even(this long a)
         {
             return a % 2 == 0;
         }

@@ -11,7 +11,7 @@ namespace jae.euler.test
         [Fact]
         public void Test1()
         {
-            var list = new List<int> { 1, 2, 3, 5, 8, 13, 21, 34, 55, 89  };
+            var list = new List<long> { 1, 2, 3, 5, 8, 13, 21, 34, 55, 89  };
 
             var sumTest = list.Where(e => e % 2 == 0).Sum();
             var max = list.Max()+1;

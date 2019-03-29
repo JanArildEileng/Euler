@@ -1,17 +1,16 @@
 ﻿using System.Linq;
-using jae.euler.lib.Fibonacci;
 using jae.euler.lib.Extender;
+using jae.euler.math;
 
 namespace jae.euler.lib
 {
     public class E002EvenFibonaccinumbers
     {
-        public int SumEven(int below)
+        public long SumEven(long below)
         {
-            var list = FibonacciSequence.GenFibonacciSequence(below);
+            Fibonacci fibonacci = new Fibonacci();
+            return fibonacci.Iterastor(below).Where(e => e.Even()).Sum();
 
-            var sum = list.Where(e => e.Even()).Sum();
-            return sum;
         }
 
     }
