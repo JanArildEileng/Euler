@@ -25,5 +25,14 @@ namespace jae.euler.lib.Extender
             return builder.ToString();
         }
 
+        public static string StringFromArrayReverse(this List<int> list)
+        {
+            StringBuilder builder = new StringBuilder();
+            for (int i = list.Count-1; i >=0; i--)
+                builder.Append(list[i]);
+
+            return builder.ToString();
+        }
+
     }
 }
