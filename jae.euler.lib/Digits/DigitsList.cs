@@ -45,5 +45,25 @@ namespace jae.euler.lib.Digits
             return sum;
 
         }
+
+        public static List<int> ConvertToDigitListe(int numbers)
+        {
+            List<int> liste = new List<int>();
+
+            liste.Add(numbers % 10);
+            numbers = numbers / 10;
+          
+            while ( numbers > 0)
+            {
+                liste.Add(numbers % 10);
+                numbers = numbers / 10;
+            }
+
+            return liste; ;
+        }
+
+
+
+
     }
 }
