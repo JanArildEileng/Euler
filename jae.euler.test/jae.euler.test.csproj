@@ -17,4 +17,14 @@
     <ProjectReference Include="..\jae.euler.math\jae.euler.math.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DataFiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="DataFiles\p022_names.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
