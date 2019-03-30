@@ -32,11 +32,9 @@ namespace jae.euler.test
 
 
             /*
-               Congratulations, the answer you gave to problem 25 is correct.
+               Congratulations, the answer you gave to problem 26 is correct.
 
-                You are the 137634th person to have solved this problem.
-                Nice work, janei, you've just advanced to Level 1 . 
-                106777 members (11.92%) have made it this far.
+                You are the 73827th person to have solved this problem.
             */
         }
     }
