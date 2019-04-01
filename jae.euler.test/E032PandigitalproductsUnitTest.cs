@@ -14,16 +14,12 @@ namespace jae.euler.test
              The product 7254 is unusual, as the identity, 39 × 186 = 7254, 
              containing multiplicand, multiplier, and product is 1 through 9 pandigital.            */
 
-  
-
             var sut = new E032Pandigitalproducts();
 
             Assert.True(sut.IdentityIsPandig(multiplicand: 39, multiplier: 186,product: 7254));
 
             int p = 40 * 186;
             Assert.False(sut.IdentityIsPandig(multiplicand: 40, multiplier: 186, product: p));
-
-
 
         }
 
@@ -35,12 +31,11 @@ namespace jae.euler.test
              */
 
             var sut = new E032Pandigitalproducts();
-           Assert.Equal(1, sut.GetSumOfAllPandigitalProucts());
+            Assert.Equal(45228, sut.GetSumOfAllPandigitalProucts());
 
             /*
-              Congratulations, the answer you gave to problem 31 is correct.
-
-                You are the 74542nd person to have solved this problem.
+              Congratulations, the answer you gave to problem 32 is correct.
+              you are the 62497th person to have solved this problem.
             */
         }
     }

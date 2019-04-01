@@ -8,41 +8,54 @@ namespace jae.euler.lib
 {
     public class E032Pandigitalproducts
     {
-        const int MAX = 987654321;
+        List<long> pandigitalProucts;
 
         public long GetSumOfAllPandigitalProucts()
         {
-           
-            List<long> pandigitalProucts = new List<long>();
-            long sq = (long)Math.Sqrt((double)MAX) + 1;
+            int[] candidates = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            pandigitalProucts = new List<long>();
 
+            MultiplicandRecursive(multiplicand: 0,candidates:candidates, level:0 );
 
-            for (int multiplicand=1; multiplicand< sq; multiplicand++)
-            {
-
-                for (int multiplier = multiplicand; multiplier < MAX; multiplier++)
-                {
-                    long product = multiplicand * multiplier;
-                    if (product > MAX) break;
-                    if (IdentityIsPandig(multiplicand, multiplier, product)){
-
-                        pandigitalProucts.Add(product);
-                    }
-                }
-
-            }
-
-            pandigitalProucts = pandigitalProucts.Distinct().ToList();
-            long SumOfAllPandigitalProucts = pandigitalProucts.Sum();
-            return SumOfAllPandigitalProucts;
+            return pandigitalProucts.Distinct().ToList().Sum(); 
         }
 
+        private void MultiplicandRecursive(int multiplicand,int[] candidates, int level )
+        {
+            if (level > 4) return;
 
+            for(int i=0;i< candidates.Length;i++)
+            {
+                int nextDigit = candidates[i];
+                var nextCandidates = candidates.Where(e => e != nextDigit).ToArray();
+                var nextmultiplicand = multiplicand * 10 + nextDigit;
+                MultiplierRecursive(nextmultiplicand, multiplier:0, candidates: nextCandidates, level:level+1);
+                MultiplicandRecursive(multiplicand: nextmultiplicand, candidates: nextCandidates, level: level + 1);
+            }
+        }
 
+        private void MultiplierRecursive(int multiplicand,int multiplier, int[] candidates, int level)
+        {
+            if (level >4) return;
 
+            //current product
+            for (int i = 0; i < candidates.Length; i++)
+            {
+                int nextDigit = candidates[i];
+                int nextmultiplier = 10 * multiplier + nextDigit;
+  
+                long product = multiplicand * nextmultiplier;
+                if (IdentityIsPandig(multiplicand, nextmultiplier, product))
+                {
+                    pandigitalProucts.Add(product);
+                }
 
+                var nextCandidates = candidates.Where(e => e != nextDigit).ToArray();
+                //recursive
+                MultiplierRecursive(multiplicand: multiplicand, multiplier: nextmultiplier, candidates: nextCandidates, level: level + 1);
+            }
 
-
+        }
 
 
 
@@ -56,6 +69,9 @@ namespace jae.euler.lib
             var str = builder.ToString();
 
             if (str.Length > 9) return false;
+            if (str.Length < 9) return false;
+
+
 
             try
             {
