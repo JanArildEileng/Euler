@@ -1,97 +1,57 @@
-﻿using jae.euler.util;
+﻿using jae.euler.math;
+using jae.euler.util;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace jae.euler.lib
 {
     public class E033Digitcancellingfractions
     {
-
-        public int GeLowestCommonTerms()
+        public long GeLowestCommonTerms()
         {
-            for(int denominator=10; denominator<100; denominator++)
-            {
+            List<Fraction> denominatorListe = new List<Fraction>();
 
+            for (int denominator=10; denominator<100; denominator++)
+            {
                 for (int numerator = 10; numerator < denominator; numerator++)
                 {
-                    int ahigh = numerator /10;
-                    int alow = numerator % 10;
+                    Fraction fractionUnderTest = new Fraction { Numerator = numerator, Denominator = denominator };
 
-                    int bhigh = denominator / 10;
-                    int blow = denominator % 10;
+                    (long high,long low) numeratorDigits = (fractionUnderTest.Numerator / 10, fractionUnderTest.Numerator % 10);
+                    (long high, long low) denominatorDigits = (fractionUnderTest.Denominator / 10, fractionUnderTest.Denominator % 10);
 
-                    if (denominator==98 && numerator==49)
+                    if (denominatorDigits.low == 0 || numeratorDigits.low == 0) continue;
+
+                    Fraction digitcancellingfraction = null;
+
+                    if (numeratorDigits.high == denominatorDigits.low)
                     {
-                        var t2 = 1;
+                        digitcancellingfraction = new Fraction { Numerator = numeratorDigits.low, Denominator = denominatorDigits.high };
+                    }
+                    else if (numeratorDigits.low == denominatorDigits.high)
+                    {
+                        digitcancellingfraction = new Fraction { Numerator = numeratorDigits.high, Denominator = denominatorDigits.low };
                     }
 
-
-                    if (blow == 0 || alow == 0) continue;
-            
-                    if (ahigh ==blow )
+                    if (digitcancellingfraction != null)                
                     {
-                        ahigh = blow = 0;
-                    } else 
+                        digitcancellingfraction = Fraction.ReduceFraction(digitcancellingfraction);
 
-                    if (alow == bhigh)
-                    {
-                        alow = bhigh = 0;
-                    }
-
-                    int a = ahigh * 10 + alow;
-                    int b = bhigh * 10 + blow;
-
-
-                    if ( a!= numerator || b!= denominator)
-                    {
-                        if (denominator % b==0)
+                        if (fractionUnderTest.IsReducedForm(digitcancellingfraction))
                         {
-                            int div = denominator / b;
-                            if ( a* div== numerator)
-                            {
-                                var t = 1;
-                            }
-
+                            denominatorListe.Add(digitcancellingfraction);
                         }
-              
-                       
-                    }
+
+                    } //if digitcancellingfraction
+
+                }  //numerator loop
+            } // denominator loop
 
 
-
-                }
-
-
-            }
-
-
-            return 1;
-        }
-
-
-
-
-        public bool IsDigitcancellingfractions(int numerator, int denominator)
-        {
-
-            List<int> numeratorDigits = DigitsList.ConvertToDigitListe(numerator);
-            List<int> denominatorDigits = DigitsList.ConvertToDigitListe(denominator);
-
-
-
-
-            throw new NotImplementedException();
-        }
-
-
-        public int LowestCommonTerms(int a, int b)
-        {
-
-
-            return 1;
-        }
-
-       
+            var fraction = Fraction.Product(denominatorListe);
+            return fraction.Denominator;
+        }     
     }
 }
