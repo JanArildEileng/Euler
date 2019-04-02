@@ -14,11 +14,18 @@ namespace jae.euler.lib
         public E034Digitfactorials()
         {
             //pre calc n! for n=0 til 9 ..
-            FactorialArray = Enumerable.Range(0, 10).Select(digit => Factorial.Factor(digit)).ToArray();
+            FactorialArray = Enumerable
+                .Range(0, 10)
+                .Select(digit => Factorial.Factor(digit))
+                .ToArray();
         }
 
         public long GetSumOfAllCuriousNumbers()
-        {      return Enumerable.Range(3, 2540161).Where(i => IsCuriousNumber(i)).Sum();
+        {
+            return Enumerable
+             .Range(3, 2540161)
+             .Where(i => IsCuriousNumber(i))
+             .Sum();
         }
 
         /*
