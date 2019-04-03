@@ -62,7 +62,18 @@ namespace jae.euler.util
             return liste; ;
         }
 
-
+        public static int ConvertToNumber(List<int> liste)
+        {
+     
+            int number = liste[0];
+            int tenfactor = 1;
+            for(int i=1;i< liste.Count;i++)
+            {
+                tenfactor *= 10;
+                number = tenfactor * liste[i] + number;
+            }
+            return number; ;
+        }
 
 
     }
