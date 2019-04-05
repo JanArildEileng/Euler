@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using jae.euler.lib.Palindrome;
+using jae.euler.math;
 
 namespace jae.euler.lib
 {
@@ -12,13 +12,13 @@ namespace jae.euler.lib
         public long Largest(long below,long maxFactor)
         {
              
-            long found = PalindromeHelper.PreviousPalindrome(below);
+            long found = Palindrome.PreviousPalindrome(below);
 
             while ( !isProduct(found, maxFactor) && found >0  )
             {
                 found--;
 
-                found = PalindromeHelper.PreviousPalindrome(found);
+                found = Palindrome.PreviousPalindrome(found);
             }
 
             return found;

@@ -1,8 +1,5 @@
-﻿using jae.euler.lib.Palindrome;
-using jae.euler.math;
-using System;
+﻿using jae.euler.math;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 

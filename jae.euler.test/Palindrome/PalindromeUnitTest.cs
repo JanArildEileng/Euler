@@ -1,11 +1,11 @@
-﻿using jae.euler.lib.Palindrome;
+﻿using jae.euler.math;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
 
-namespace jae.euler.test.Palindrome
+namespace jae.euler.test.PalindromeUnitTest
 {
     public class PrimeUnitTest
     {
@@ -16,9 +16,9 @@ namespace jae.euler.test.Palindrome
         [InlineData(10101)]
         public void TestIsPalindrome(long value)
         {
-            Assert.True(PalindromeHelper.IsPalindrome(value));
-            Assert.True(PalindromeHelper.IsPalindrome(value));
-            Assert.True(PalindromeHelper.IsPalindrome(value));
+            Assert.True(Palindrome.IsPalindrome(value));
+            Assert.True(Palindrome.IsPalindrome(value));
+            Assert.True(Palindrome.IsPalindrome(value));
         }
 
         [Theory]
@@ -27,9 +27,26 @@ namespace jae.euler.test.Palindrome
         [InlineData(102012)]
         public void TestIsNotPalindrome(long value)
         {
-            Assert.False(PalindromeHelper.IsPalindrome(value));
+            Assert.False(Palindrome.IsPalindrome(value));
          
         }
 
+
+        [Theory]
+        [InlineData(585)]
+        public void TestIsPalindromeBase2(long value)
+        {
+            Assert.True(Palindrome.IsPalindromeBase2(value));
+        }
+
+        [Theory]
+        [InlineData(585)]
+        public void TestalindromicBothBases(long value)
+        {
+            Assert.True(Palindrome.IsPalindromicBothBases(value));
+        }
+
+
+       
     }
 }

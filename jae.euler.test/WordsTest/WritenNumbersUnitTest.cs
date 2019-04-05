@@ -1,9 +1,4 @@
-﻿using jae.euler.lib.Palindrome;
-using jae.euler.lib.Words;
-using jae.euler.math;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using jae.euler.lib.Words;
 using Xunit;
 
 

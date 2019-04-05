@@ -1,4 +1,4 @@
-﻿using jae.euler.lib.Palindrome;
+﻿using jae.euler.math;
 using jae.euler.math;
 using System;
 using System.Collections.Generic;
