@@ -58,16 +58,27 @@ namespace jae.euler.math
             for (int i = 3; i < primliste.Count; i++)
             {
                 if (number % primliste[i] == 0) return false;
-                if (primliste[i] > sq) return true;
+                if (primliste[i] > sq)
+                    return true;
             }
 
             return true;
         }
 
 
+        public static bool IsPrime(long number)
+        {    
+            if (number % 2 == 0 ) return false;
 
+            long sq = (long)Math.Sqrt((double)number);
 
+            for (long i = 3; i < sq; i += 2)
+            {
+                if (number % i == 0)
+                    return false;           
+            }
 
-
+            return true;
+        }
     }
 }
