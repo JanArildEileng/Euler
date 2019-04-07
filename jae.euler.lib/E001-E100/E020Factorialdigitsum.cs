@@ -1,4 +1,5 @@
-﻿using jae.euler.lib.Digits;
+﻿
+using jae.euler.util;
 using System.Collections.Generic;
 using System.Linq;
 

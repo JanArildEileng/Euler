@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using jae.euler.lib.Digits;
+using jae.euler.util;
 
 namespace jae.euler.lib
 {

@@ -1,8 +1,9 @@
-﻿using jae.euler.lib.Digits;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using jae.euler.util;
 
 namespace jae.euler.lib
 {

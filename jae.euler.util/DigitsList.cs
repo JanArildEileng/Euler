@@ -61,6 +61,24 @@ namespace jae.euler.util
 
             return liste; ;
         }
+        public static List<int> ConvertToDigitListe(long numbers)
+        {
+            List<int> liste = new List<int>();
+
+            liste.Add( (int)(numbers % 10));
+            numbers = numbers / 10;
+
+            while (numbers > 0)
+            {
+                liste.Add((int)(numbers % 10));
+                numbers = numbers / 10;
+            }
+
+            return liste; ;
+        }
+
+
+
 
         public static int ConvertToNumber(List<int> liste)
         {
@@ -75,6 +93,21 @@ namespace jae.euler.util
             return number; ;
         }
 
+        public static int ConvertToNumberHighesFirst(int [] array)
+        {
+
+            int number = array[0];
+
+            int i = 1;
+            while ( i < array.Length)
+            {
+                number = 10 * number + array[i];
+                i++;
+            }
+
+            
+            return number; ;
+        }
 
     }
 }
