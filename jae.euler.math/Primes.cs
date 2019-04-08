@@ -72,7 +72,7 @@ namespace jae.euler.math
 
             long sq = (long)Math.Sqrt((double)number);
 
-            for (long i = 3; i < sq; i += 2)
+            for (long i = 3; i <=sq; i += 2)
             {
                 if (number % i == 0)
                     return false;           
