@@ -40,6 +40,35 @@ namespace jae.euler.math
         }
 
 
+        public static long GetN(long c)
+        {
+
+            // n  * (3 * n - 1)/2 =c
+            // 3n2 -n -2c=0    0=> a=3 b= -b
+            long b = -1;
+            long a = 3;
+
+            var x = (-b + Math.Sqrt(1 + 4 * a * 2*c)) / (2 * a);
+
+            if (x > 0 && GetNumber((long)x) == c)
+            {
+                return (long)x;
+            }
+
+            x = (-b - Math.Sqrt(1 + 4 * a * 2* c)) / (2 * a);
+
+            if (x > 0 && GetNumber((long)x) == c)
+            {
+                return (long)x;
+            }
+
+            return -1;
+
+        }
+
+
+
+
 
 
     }

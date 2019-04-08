@@ -26,7 +26,16 @@ namespace jae.euler.test.math
             var tabell= Pentagonnumber.Iterastor(100).ToArray();
             Assert.Equal(tn, tabell[n - 1]);
         }
-        
+
+
+        [Theory]
+        [InlineData(40755, 165)]
+        [InlineData(92, 8)]
+        public void TestTriangleGetN(long n, int tn)
+        {
+
+            Assert.Equal(tn, Pentagonnumber.GetN(n));
+        }
 
     }
 }

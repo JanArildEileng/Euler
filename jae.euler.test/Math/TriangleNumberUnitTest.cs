@@ -19,14 +19,25 @@ namespace jae.euler.test.math
         [InlineData(1,1)]
         [InlineData(2, 3)]
         [InlineData(8, 36)]
-    
+        [InlineData(285, 40755)]
+
         public void TestTriangleNumber(int n, int tn)
         {
 
-            var tabell= TriangleNumber.Iterastor(100).ToArray();
+            var tabell= TriangleNumber.Iterastor(50755).ToArray();
             Assert.Equal(tn, tabell[n - 1]);
         }
-        
+
+
+ 
+        [Theory]
+        [InlineData(40755, 285)]
+        [InlineData(36, 8)]
+        public void TestTriangleGetN(long n, int tn)
+        {
+
+            Assert.Equal(tn, TriangleNumber.GetN(n));
+        }
 
     }
 }
