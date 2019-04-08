@@ -93,6 +93,20 @@ namespace jae.euler.util
             return number; ;
         }
 
+
+        public static long ConvertToNumberLong(List<int> liste)
+        {
+
+            long number = liste[0];
+            int tenfactor = 1;
+            for (int i = 1; i < liste.Count; i++)
+            {
+                tenfactor *= 10;
+                number = tenfactor * liste[i] + number;
+            }
+            return number; ;
+        }
+
         public static int ConvertToNumberHighesFirst(int [] array)
         {
 
