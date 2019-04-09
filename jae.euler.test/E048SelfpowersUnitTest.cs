@@ -4,7 +4,7 @@ using jae.euler.math;
 
 namespace jae.euler.test
 {
-    public class E048SelfpowersUnitTes
+    public class E048SelfpowersUnitTest
     {
 
         [Fact]
@@ -12,14 +12,10 @@ namespace jae.euler.test
         {
             /*
            The series, 11 + 22 + 33 + ... + 1010 = 10405071317.
-
-
-
             */
             var sut = new E048Selfpowers();
 
             Assert.Equal(405071317, sut.GetLastTenDigits(topower:10));
-         
 
         }
 
@@ -28,19 +24,15 @@ namespace jae.euler.test
         public void Solution()
         {
             /*
-        Find the last ten digits of the series, 11 + 22 + 33 + ... + 10001000.   
-        
-             
+                Find the last ten digits of the series, 11 + 22 + 33 + ... + 10001000.   
              */
 
             var sut = new E048Selfpowers();
-
-            Assert.Equal(10405071317, sut.GetLastTenDigits(topower: 1000));
+            Assert.Equal(9110846700, sut.GetLastTenDigits(topower: 1000));
 
             /*
-                 Congratulations, the answer you gave to problem 47 is correct.
-
-                    You are the 50779th person to have solved this problem.
+                Congratulations, the answer you gave to problem 48 is correct.
+                You are the 100543rd person to have solved this problem.
              */
         }
     }

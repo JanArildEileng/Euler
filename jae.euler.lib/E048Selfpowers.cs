@@ -8,27 +8,25 @@ namespace jae.euler.lib
 {
     public class E048Selfpowers
     {
+        const int MaxDigits = 10;
         public long GetLastTenDigits(int topower)
         {
             List<int> digitlist = new List<int>();
 
             for (int i = 1; i <= topower; i++)
             {
-
-            
                 List<int> liste = DigitsList.ConvertToDigitListe(i);
 
                 for (int j = 2; j <= i; j++)
                 {
-                    liste = DigitsList.Product(liste, i);
+                    liste = DigitsList.Product(liste, MaxDigits, i);
                 }
 
                 digitlist = DigitsList.Sum(digitlist, liste);
+  
             }
 
-            digitlist = digitlist.Take(10).ToList();
-            long number = DigitsList.ConvertToNumberLong(digitlist);
-            return number;
+           return DigitsList.ConvertToNumberLong(digitlist.Take(MaxDigits).ToList());
         }
     }
 }

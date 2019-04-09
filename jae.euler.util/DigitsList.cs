@@ -25,6 +25,28 @@ namespace jae.euler.util
 
         }
 
+        public static List<int> Product(List<int> numbers1, int maxDigits,int multiplier)
+        {
+            List<int> sum = new List<int>();
+            int rest = 0;
+            int i = 0;
+            while (numbers1.Count > i || rest > 0)
+            {
+                int s = rest;
+                s += numbers1.Count > i ? numbers1[i] * multiplier : 0;
+                sum.Add(s % 10);
+                rest = s / 10;
+                i++;
+                if (i > maxDigits) break;
+            }
+
+            return sum;
+
+        }
+
+
+
+
 
         public static List<int> Sum(List<int> numbers1, List<int> numbers2)
         {
@@ -98,7 +120,7 @@ namespace jae.euler.util
         {
 
             long number = liste[0];
-            int tenfactor = 1;
+            long tenfactor = 1;
             for (int i = 1; i < liste.Count; i++)
             {
                 tenfactor *= 10;
