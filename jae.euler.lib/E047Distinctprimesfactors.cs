@@ -8,18 +8,20 @@ namespace jae.euler.lib
 {
     public class E047Distinctprimesfactors
     {
+
+        long[] primes;
+
         public long GetFirstConsecutivenumberWith(int primefactors,int numberConsecutive)
         {
-            //TODO:ytelse...!
+            primes = Primes.GetPrimeFactorsBelowNumber(200000).ToArray();
             long number = 1;
-            while(true)
-            {
 
+            while (true)
+            {
                 long distinctprimeFactorsInNumber = 0;
                 for (int j=0;j< numberConsecutive;j++)
                 {
-                    distinctprimeFactorsInNumber = Primes.GetPrimeFactorsInNumber(number+j).Distinct().Count();
-                  //  distinctprimeFactorsInNumber = GetDistinctprimeFactorsInNumber(number + j, primefactors);
+                    distinctprimeFactorsInNumber = GetDistinctprimeFactorsInNumber(number + j, primefactors);
                     if (distinctprimeFactorsInNumber != primefactors)
                     {
                         number += j ;
@@ -30,49 +32,27 @@ namespace jae.euler.lib
                 if (distinctprimeFactorsInNumber == primefactors)
                     return number;
 
-
-
                 number++;
-
-
-
             }
-
-
-
-
         }
 
 
-        public  long GetDistinctprimeFactorsInNumber(long number,int maxprimefactors)
+        public long GetDistinctprimeFactorsInNumber(long number, int maxprimefactors)
         {
-           var rest = number;
-            var current = 2;
             int primefactors = 0;
-            bool first = true;
+            long halv = number/2;
 
-
-            while (current <= rest)
+            int i = 0;
+            while (primes[i]<= halv)
             {
-                if (rest % current == 0)
-                {
-                        if (first)
-                    {
-                        primefactors++;
-                        first = false;
-                        if (primefactors > maxprimefactors) return -1;
-                    }
-
-                    rest = rest / current;
-                }
-                else
-                {
-                    first = true;
-                    current++;
-                }
+                if (number % primes[i] == 0) primefactors++;
+                if (primefactors > maxprimefactors) return -1;
+                i++;
             }
-
+          
             return primefactors;
         }
+
+      
     }
 }
