@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace jae.euler.test
 {
-    public class E049PrimePermutationsTest
+    public class E049PrimePermutationsUnitTest
     {
 
         [Fact]
