@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Folder Include="DataFiles\" />
+    <Folder Include="level03\" />
   </ItemGroup>
 
   <ItemGroup>
