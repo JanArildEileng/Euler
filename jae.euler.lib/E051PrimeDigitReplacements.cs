@@ -10,57 +10,55 @@ namespace jae.euler.lib
     public class E051PrimeDigitReplacements
     {
         Dictionary<long, long> PrimeDictionary;
+        int minPrime;
+        char[] chararray = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+       
 
-        public long[] GetReplacementPrimes(string numberString)
+        public long GetSmallestReplacementPrimesWith(int startnumber, int maxNumber, int primevalfamily)
         {
-            int maxPrime = StringToNumber.GetMaxNumber(numberString);
-            int minPrime = StringToNumber.GetMinNumber(numberString);
-            PrimeDictionary = Primes.GetPrimeFactorsBelowNumber(maxPrime).ToDictionary(e => e);
+            PrimeDictionary = Primes.GetPrimeFactorsBelowNumber(maxNumber).ToDictionary(e => e);
+            minPrime = startnumber;
 
 
+            while (startnumber < maxNumber)
+            {
+                var str = startnumber.ToString();
+                int max = 1 << str.Length;
+
+                for (int hidingNumber = 1; hidingNumber < max; hidingNumber++)
+                {
+                    var str2 = Star.Hide(str, hidingNumber);
+                    long[] re = GetReplacementPrimes(str2);
+
+                    if (re.Length == primevalfamily)
+                        return re[0];
+                }
+
+                startnumber++;
+                while (startnumber % 2 == 0 || startnumber % 3 == 0)
+                    startnumber++;
+            }
+
+            return -1;
+        }
+
+        private  long[] GetReplacementPrimes(string numberString)
+        {
+          //  int minPrime = StringToNumber.GetMinNumber(numberString);
+ 
             List<long> replacementPrimes = new List<long>();
 
-
-            char[] chararray = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+           
             for(int i=0;i<=9;i++)
             {
-                string s = numberString.Replace('*', chararray[i]);
-
-                
+                string s = numberString.Replace('*', chararray[i]);             
                 long number = long.Parse(s);
-
                 if (number > minPrime && PrimeDictionary.ContainsKey(number))
-                    replacementPrimes.Add(number); ;
+                        replacementPrimes.Add(number); ;
             }
 
             return replacementPrimes.ToArray(); ;
         }
-
-        public long GetSmallestReplacementPrimes(string numberString)
-        {
-            long[] replacementPrimes = GetReplacementPrimes(numberString);
-            if (replacementPrimes.Length>0)
-                return replacementPrimes[0];
-            return -1;
-
-        }
-
-        public long GetSmallestReplacementPrimesWith(int startnumber,int maxNumber, int primevalfamily)
-        {
-            PrimeDictionary = Primes.GetPrimeFactorsBelowNumber(maxNumber).ToDictionary(e => e);
-
-            int numberOfReplaceMentFound = 0;
-
-            List<int> digits = DigitsList.ConvertToDigitListe(startnumber);
-
-            while (numberOfReplaceMentFound< primevalfamily)
-            {
-
-
-            }
-
-
-            throw new NotImplementedException();
-        }
+       
     }
 }

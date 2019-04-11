@@ -24,13 +24,9 @@ namespace jae.euler.test.level03
             var sut = new E051PrimeDigitReplacements();
 
            
-           Assert.Equal(13, sut.GetSmallestReplacementPrimesWith(11,100, 6));
-
-            //Assert.Equal(6, sut.GetReplacementPrimes("*3").Length);
-            //Assert.Equal(13, sut.GetSmallestReplacementPrimes("*3"));
-
-            //Assert.Equal(7, sut.GetReplacementPrimes("56**3").Length);
-            //Assert.Equal(56003, sut.GetSmallestReplacementPrimes("56**3"));
+           Assert.Equal(13, sut.GetSmallestReplacementPrimesWith(10,100, 6));
+           Assert.Equal(56003, sut.GetSmallestReplacementPrimesWith(40000, 100000, 7));
+          
         }
 
 
@@ -43,13 +39,12 @@ namespace jae.euler.test.level03
             */
 
             var sut = new E051PrimeDigitReplacements();
-        //   Assert.Equal(997651, sut.GetSmallestReplacementPrimesWith(primevalfamily:8));
+            Assert.Equal(121313, sut.GetSmallestReplacementPrimesWith(56000, 1000000, 8));
 
             /*
-                Congratulations, the answer you gave to problem 50 is correct.
-                You are the 54739th person to have solved this problem.
-                Nice work, janei, you've just advanced to Level 2 . 
-                47944 members (5.34%) have made it this far.
+               Congratulations, the answer you gave to problem 51 is correct.
+
+                You are the 28970th person to have solved this problem.
              */
         }
     }
