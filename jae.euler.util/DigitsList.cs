@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace jae.euler.util
 {
@@ -67,6 +68,49 @@ namespace jae.euler.util
             return sum;
 
         }
+
+
+        public static List<int> Substract(List<int> numbers1, List<int> numbers2)
+        {
+            List<int> sum = new List<int>();
+            int trans = 0;
+            int i = 0;
+            while (numbers1.Count > i || numbers2.Count > i )
+            {
+                int s1= numbers1.Count > i ? numbers1[i] : 0;
+                int s2= numbers2.Count > i ? numbers2[i] : 0;
+
+                int s = s2 + trans;
+
+
+
+
+                if (s <= s1)
+                {
+                    trans = 0;
+                    sum.Add(s1 - s);
+                } else
+                {
+                    trans = 1;
+                    int add = 10 + s1 - s;
+                    sum.Add(add);
+                }
+
+                 i++;
+            }
+
+            while(sum.Count >1 && sum.Last()==0)
+            {
+                sum = sum.SkipLast(1).ToList();
+            }
+
+
+            return sum;
+
+        }
+
+
+
 
         public static List<int> ConvertToDigitListe(int numbers)
         {
