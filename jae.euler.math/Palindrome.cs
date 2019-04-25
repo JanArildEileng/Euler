@@ -34,6 +34,23 @@ namespace jae.euler.math
 
         }
 
+
+        public static bool IsPalindrome(List<int> list) { 
+            int len = list.Count;
+
+            for (int i = 0; i < len / 2; i++)
+            {
+                if (list[i] != list[len - i - 1]) return false;
+            }
+
+            return true;
+
+        }
+
+   
+
+
+
         public static bool IsPalindromeBase2(long number)
         {
             StringBuilder builder = new StringBuilder();

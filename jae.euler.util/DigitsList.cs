@@ -8,6 +8,16 @@ namespace jae.euler.util
     public class DigitsList
     {
 
+        public static List<int> ReverseCopy(List<int> digits)
+        {
+            List<int> reverseList = digits.ToList();
+            reverseList.Reverse();
+            return reverseList;
+
+        }
+
+
+
         public static  List<int> Product(List<int> numbers1, int multiplier)
         {
             List<int> sum = new List<int>();
@@ -188,6 +198,10 @@ namespace jae.euler.util
             
             return number; ;
         }
+
+
+       
+
 
     }
 }
