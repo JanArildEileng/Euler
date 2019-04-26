@@ -24,7 +24,30 @@ namespace jae.euler.math
             return false;
         }
 
-        public static Fraction ReduceFraction(Fraction fraction)
+        public static Fraction AddFraction(Fraction fraction1, Fraction fraction2)
+        {
+            return new Fraction
+            {
+
+                Numerator = fraction1.Denominator * fraction2.Numerator + fraction2.Denominator * fraction1.Numerator,
+                Denominator = fraction2.Denominator * fraction1.Denominator,
+            };
+
+
+        }
+
+        public void Invert()
+        {
+            long tmp = Numerator;
+            Numerator=Denominator;
+            Denominator=tmp;
+        }
+
+
+
+
+
+    public static Fraction ReduceFraction(Fraction fraction)
         {
             if (fraction.Denominator % fraction.Numerator == 0)
             {
