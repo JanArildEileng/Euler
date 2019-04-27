@@ -62,7 +62,8 @@ namespace jae.euler.math
                     return true;
             }
 
-            return true;
+            throw new Exception($"Primetest failed, number {number}  to bigfor list max={primliste[primliste.Count - 1]}");
+        
         }
 
 
