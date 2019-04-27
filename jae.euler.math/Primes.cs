@@ -55,10 +55,10 @@ namespace jae.euler.math
         {
             long sq = (long)Math.Sqrt((double)number)+1;
 
-            for (int i = 3; i < primliste.Count; i++)
+            for (int i = 0; i < primliste.Count; i++)
             {
                 if (number % primliste[i] == 0) return false;
-                if (primliste[i] > sq)
+                if (primliste[i] >= sq)
                     return true;
             }
 
