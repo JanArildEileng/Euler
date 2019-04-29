@@ -9,11 +9,6 @@ namespace jae.euler.test.level03
 {
     public class E062CubicPermutationsUnitTest
     {
-
-
-
-     
-
         [Fact]
         public void Test_1()
         {
@@ -24,10 +19,7 @@ namespace jae.euler.test.level03
                */
             var sut = new E062CubicPermutations();
             Assert.Equal(41063625, sut.GetSmallestCube(numberOfpermutations: 3));
-
-
         }
-
 
         [Fact]
         public void Solution()
@@ -39,8 +31,6 @@ namespace jae.euler.test.level03
             var sut = new E062CubicPermutations();
             Assert.Equal(127035954683, sut.GetSmallestCube(numberOfpermutations: 5));
 
-
-
             /*
               Congratulations, the answer you gave to problem 62 is correct.
 
@@ -48,6 +38,4 @@ namespace jae.euler.test.level03
             */
         }
     }
-
-
 }
