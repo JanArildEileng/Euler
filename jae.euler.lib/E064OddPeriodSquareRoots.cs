@@ -36,7 +36,7 @@ namespace jae.euler.lib
             int a0 = (int)Math.Sqrt(number);
             //   √=[4; (1, 3, 1, 8)] ,
 
-            double b = Math.Sqrt(number) - a0;
+            double b = (double)Math.Sqrt(number) - a0;
 
 
 
@@ -44,11 +44,6 @@ namespace jae.euler.lib
             preb.Add(new helrest { Hel = a0, Rest=0});
 
 
-
-            if ( b <0.1)
-            {
-                var e = 1;
-            }
 
             int periodeLength=f(b, preb)  ;
 
@@ -93,8 +88,16 @@ namespace jae.euler.lib
                 throw new Exception("aa");
             }
 
+
+
             if (b == 0) return 0;
-            b = 1.0 / (b);
+            b = 1 / (b);
+
+            b = Math.Round (b, 10, MidpointRounding.AwayFromZero);
+
+           // b = Math.Round(b, 20);
+
+
 
 
             int an = (int)b;
@@ -104,7 +107,9 @@ namespace jae.euler.lib
           
 
            var treff= preb.Where(r => r.Hel == helrest.Hel &&
-            ( ( r.Rest <= (helrest.Rest + 0.01) &&  r.Rest >= (helrest.Rest - 0.01))))
+//            ( ( r.Rest <= (helrest.Rest + 0.01) &&  r.Rest >= (helrest.Rest - 0.01))))
+                ((Math.Abs((double) r.Rest - (double)helrest.Rest) < 0.01 )))
+
             .ToList();
 
 
@@ -115,11 +120,13 @@ namespace jae.euler.lib
 
 
    
-            if (treff.Count()==3)
+            if (treff.Count()==2)
             {
                 int index = preb.IndexOf(treff[0]);
                 int index2 = preb.IndexOf(treff[1], index+1);
-                int index3 = preb.IndexOf(treff[2], index2 + 1);
+                //  int index3 = preb.IndexOf(treff[2], index2 + 1);
+                  int index3 = preb.Count();
+
 
 
                 int periodeLength = index2 - index;
@@ -136,7 +143,16 @@ namespace jae.euler.lib
 
 
             if (preb.Count() > 100)
+            {
+    
+                foreach(var t in preb)
+                {
+                    Console.WriteLine($"{ t.Hel,2} { t.Rest}");
+                }   
+
                 throw new Exception("Overflow");
+
+            }
 
             return f(bb, preb);
         }

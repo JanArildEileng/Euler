@@ -13,14 +13,40 @@ namespace jae.euler.runner
             Console.WriteLine("Hello World!");
 
 
-            var sut = new E060PrimePairSets(1000000);
-            sut.GetLowestSum(pairsetSize: 5);
+            double x = Math.Sqrt(26);
+            Console.WriteLine($"x= {x}");
+            double a = Math.Truncate(x);
+            double b = x - a;
+
+            double sum = a + Recursive(b, 0);
+
+           Console.WriteLine($"sum ={sum}  Diff={sum-x}");
+            
+
+
+            //        var sut = new E064OddPeriodSquareRoots();
+            //       sut.GetPeriodsOfSquareRoot(19);
 
 
 
         }
 
-       
+        private static double Recursive(double b, int counter)
+        {
+           
+
+            double x = 1.0 / b;
+            double a = Math.Truncate(x);
+            b = x - a;
+
+            Console.WriteLine($"{counter,3}  a={a,2}  b={b}  ");
+            counter++;
+            if (counter > 30)
+                return 1.0 / a;
+            else
+                return (1.0 / (a + Recursive(b, counter)));
+
+        }
     }
 
 
