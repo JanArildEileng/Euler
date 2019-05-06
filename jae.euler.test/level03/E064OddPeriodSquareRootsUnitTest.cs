@@ -10,9 +10,7 @@ namespace jae.euler.test.level03
     public class E064OddPeriodSquareRootsUnitTest
     {
 
-
-
-
+       
         /*  
         The first ten continued fraction representations of(irrational) square roots are:
         2–√=[1;(2)], period=1
@@ -53,8 +51,7 @@ namespace jae.euler.test.level03
         public void TestContinuedFraction23()
         {
             var sut = new E064OddPeriodSquareRoots();
-            Assert.Equal(4, sut.GetPeriodsOfSquareRoot(28));
-
+            Assert.Equal(4, sut.GetPeriodsOfSquareRoot(23));
         }
 
 
@@ -80,12 +77,12 @@ namespace jae.euler.test.level03
 
             var sut = new E064OddPeriodSquareRoots();
 
-            Assert.Equal(-1, sut.GetNumberOfOddPeriodes(N: 10000));
+            Assert.Equal(1322, sut.GetNumberOfOddPeriodes(N: 10000));
 
             /*
-              Congratulations, the answer you gave to problem 63 is correct.
+             Congratulations, the answer you gave to problem 64 is correct.
 
-              You are the 37859th person to have solved this problem.
+            You are the 19094th person to have solved this problem.
             */
         }
     }

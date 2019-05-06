@@ -7,12 +7,15 @@ namespace jae.euler.lib
 {
     public class E064OddPeriodSquareRoots
     {
-
-        public class helrest
+     
+        public class PeriodParameters
         {
-            public int Hel { get; set; }
-            public double Rest { get; set; }
+            public int an { get; set; }
+            public int sub { get; set; }
+            public double f { get; set; }
         }
+
+       
 
 
         public int GetNumberOfOddPeriodes(int N)
@@ -20,145 +23,75 @@ namespace jae.euler.lib
             int numberOfOddPeriodes = 0;
             for (int i=1;i<=N;i++)
             {
-
                 var periodeLength = GetPeriodsOfSquareRoot(i);
                 if (periodeLength % 2 == 1) numberOfOddPeriodes++;
-
             }
 
             return numberOfOddPeriodes;
         }
 
-        public int GetPeriodsOfSquareRoot(int number)
+
+        public int GetPeriodsOfSquareRoot(int N)
         {
-            List<helrest> preb = new List<helrest>();
+            int a0 = GetClosestIntegertToSquare(N);
 
-            int a0 = (int)Math.Sqrt(number);
-            //   √=[4; (1, 3, 1, 8)] ,
+            if (a0 * a0 == N) return 0;
+ 
+            List<PeriodParameters> periodParameterList = new List<PeriodParameters>();
 
-            double b = (double)Math.Sqrt(number) - a0;
+            var periodParameters = new PeriodParameters { an = a0,sub=-a0, f = 1.0 };
+            periodParameterList.Add(periodParameters);
 
-
-
-            //     preb.Add(new helrest { Hel = a0, Rest = (int)(10000 * b) });
-            preb.Add(new helrest { Hel = a0, Rest=0});
-
-
-
-            int periodeLength=f(b, preb)  ;
-
-            double sum = preb[0].Hel;
-
-            if (preb.Count() >1 )
-                sum += 1.0/summer(preb, 1);
-
-
-            if (Math.Abs(sum -Math.Sqrt(number))  >0.2 ) {
-
-                throw new Exception("Difference");
-            }
-           
-
-
-
-
-            return periodeLength;
-        }
-
-
-
-        private double summer (List<helrest> preb, int index)
-        {
-
-            if (index < (preb.Count - 1))
-                return preb[index].Hel + 1.0 / summer(preb, index+1);
-            else
-                return preb[index].Hel;
-        }
-
-
-
-        public int f(double b, List<helrest> preb)
-        {
-            if (b < 0)
-                throw new Exception("b er negtraiv");
-
-            if (preb.Count() > 1 && b==0)
+            while (periodParameterList.Count < 300)
             {
-                throw new Exception("aa");
-            }
+                periodParameters = CalcNextPeriodParameters(a0, N, periodParameters);
+                periodParameterList.Add(periodParameters);
 
+                var treff = periodParameterList.Where(r => r.an == periodParameters.an && r.sub == periodParameters.sub && Math.Abs(r.f- periodParameters.f) < 0.10).ToList();
 
-
-            if (b == 0) return 0;
-            b = 1 / (b);
-
-            b = Math.Round (b, 10, MidpointRounding.AwayFromZero);
-
-           // b = Math.Round(b, 20);
-
-
-
-
-            int an = (int)b;
-            double bb = b - an;
-            var helrest = new helrest { Hel = an, Rest = bb };
-
-          
-
-           var treff= preb.Where(r => r.Hel == helrest.Hel &&
-//            ( ( r.Rest <= (helrest.Rest + 0.01) &&  r.Rest >= (helrest.Rest - 0.01))))
-                ((Math.Abs((double) r.Rest - (double)helrest.Rest) < 0.01 )))
-
-            .ToList();
-
-
-            //if ( l.Count() >0)
-            //{
-            //    var ff = 1;
-            //}
-
-
-   
-            if (treff.Count()==2)
-            {
-                int index = preb.IndexOf(treff[0]);
-                int index2 = preb.IndexOf(treff[1], index+1);
-                //  int index3 = preb.IndexOf(treff[2], index2 + 1);
-                  int index3 = preb.Count();
-
-
-
-                int periodeLength = index2 - index;
-                int periodeLength2 = index3 - index2;
-
-                if (periodeLength == periodeLength2)
+                if (treff.Count() == 2)
                 {
-                    return periodeLength;
+                    int index = periodParameterList.IndexOf(treff[0]);
+                    int index2 = periodParameterList.Count()-1;
+
+                    return index2 - index;
                 }
-
             }
+            throw new Exception($"Periode ikke funnet for {N}");
+        }
 
-           preb.Add(helrest);
+        public PeriodParameters CalcNextPeriodParameters(int a0,int N, PeriodParameters tt)
+        {
+            int f2 = N - tt.sub * tt.sub;
 
-
-            if (preb.Count() > 100)
+            int an = 0;
+            while(  - ( (an+1)*f2/tt.f)  +(-1)*tt.sub  >=-a0 )
             {
-    
-                foreach(var t in preb)
-                {
-                    Console.WriteLine($"{ t.Hel,2} { t.Rest}");
-                }   
-
-                throw new Exception("Overflow");
-
+                an++;
             }
 
-            return f(bb, preb);
+            int sub =(int) -((an) * f2 / tt.f) + (-1) * tt.sub;
+
+            var nextPeriodParameters = new PeriodParameters { an = an, sub = sub, f=(f2/tt.f ) };
+            return nextPeriodParameters;
         }
 
 
+        private int GetClosestIntegertToSquare(int N)
+        {
+            int a0 = 1;
 
+            for (int i = 2; i < N; i++)
+            {
+                if (i * i <= N)
+                {
+                    a0 = i;
+                }
+                else
+                    break;
+            }
+            return a0;
+        }
 
     }
 }
