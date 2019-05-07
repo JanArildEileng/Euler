@@ -4,11 +4,14 @@ using jae.euler.math;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
+using System.Numerics;
 
 namespace jae.euler.test.level03
 {
     public class E066DiophantineEquationUnitTest
     {
+     
+
         [Fact]
         public void Test_MinimalSolution()
         {
@@ -20,8 +23,12 @@ namespace jae.euler.test.level03
             Assert.Equal(649, sut.GetXInMinimumSolution(D:13));
 
             Assert.Equal(31, sut.GetXInMinimumSolution(D: 60));
-            Assert.Equal(649, sut.GetXInMinimumSolution(D: 61));
+            Assert.Equal(1766319049, sut.GetXInMinimumSolution(D: 61));
+            Assert.Equal(16916040084175685, sut.GetXInMinimumSolution(D: 454));
+            //  9000987377460935993101449 821
+            //16421658242965910275055840472270471049   661
 
+      
 
         }
 
@@ -47,16 +54,18 @@ namespace jae.euler.test.level03
         public void Solution()
         {
             /*
-            Find the smallest cube for which exactly five permutations of its digits are cube.
+            Find the value of D ≤ 1000 in minimal solutions of x for which the largest value of x is obtained.
             */
 
             var sut = new E066DiophantineEquation();
-            Assert.Equal(1, sut.GetDFromLargestXInMinimumSolution(DMax:1000));
+            Assert.Equal(661, sut.GetDFromLargestXInMinimumSolution(DMax:1000));
 
             /*
-              Congratulations, the answer you gave to problem 62 is correct.
+             Congratulations, the answer you gave to problem 66 is correct.
 
-             You are the 27159th person to have solved this problem.
+            You are the 16951st person to have solved this problem.
+
+            This problem had a difficulty rating of 25%. The highest difficulty rating you had previously solved was 20%
             */
         }
     }
