@@ -8,62 +8,32 @@ namespace jae.euler.lib
 {
     public class E069TotientMaximum
     {
-        List<long> primeFactors;
-        Dictionary<long, long> dict;
-
+        long vSize;
+        Totient totient;
         public E069TotientMaximum(int size)
         {
-             primeFactors = Primes.GetPrimeFactorsBelowNumber((long)size);
-            dict = primeFactors.ToDictionary(p => p);
-
+            vSize = size;
+            totient = new Totient(1000000);
         }
 
-
-        /*
-           Ser ut som  Euler's Totient function, φ(n)  gir max, 
-           når n er minste tall med maximalt antall prime-faktorer..
-
-            
-         */
-
-        public int GetNWithMaxTotient(int upperlimit)
+        public int GetNWithMaxTotient()
         {
-   
-            long product = 1;
-      
-            int i = 0;
-            while (true)
+            double maxNtoPhi = Double.MinValue;
+            int maxN = -1;
+
+            for (int n = 2; n < vSize; n++)
             {
-                if (product * primeFactors[i] <= upperlimit)
+                long phi = totient.Calc(n);
+                // n / φ(n)
+                double nToPhi = 1.0 * n / phi;
+                if (nToPhi > maxNtoPhi)
                 {
-                    product *= primeFactors[i];
-                    i++;
-                }
-                else
-                    return (int)product;
+                    maxNtoPhi = nToPhi;
+                    maxN = n;
+                 }
             }
-
+            return maxN;
         }
-
-
-
-
-        /*
-         *  Euler's Totient function, φ(n) [sometimes called the phi function], is used to determine the number of numbers less than n which are relatively prime to n.
-         */
-
-
-        public int Totient(int n)
-        {
-            var primes = Primes.GetPrimeFactorsInNumber(n).Distinct();
-            return Enumerable.Range(1, n - 1).Where(e => !primes.Any(p => e % p == 0)).Count();
-
-        }
-
-
-
-
-
         
     }
 }
