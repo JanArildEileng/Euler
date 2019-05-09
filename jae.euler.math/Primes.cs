@@ -29,6 +29,56 @@ namespace jae.euler.math
             return primeList;
         }
 
+        public static List<long> GetPrimeFactorsInNumber(List<long> primeNumbers, Dictionary<long, long> primeDict, long number)
+        {
+            List<long> primeList = new List<long>();
+
+            var rest = number;
+            int index = 0;
+            try
+            {
+
+          
+            var current = primeNumbers[index];
+
+
+            while (current <= rest)
+            {
+                if (primeDict.ContainsKey(rest))
+                {
+
+                    primeList.Add(rest);
+                    return primeList;
+                }
+
+                if (rest % current == 0)
+                {
+                    primeList.Add(current);
+                    rest = rest / current;
+                }
+                else
+                {
+                    index++;
+                    current = primeNumbers[index];
+                }
+            }
+
+            return primeList;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
+
+
+
+
+
+
         public static List<long> GetPrimeFactorsBelowNumber(long number)
         {
             List<long> primeList = new List<long>();
