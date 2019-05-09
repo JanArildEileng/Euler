@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Linq;
 using jae.euler.math;
 
@@ -10,14 +8,7 @@ namespace jae.euler.lib
     {
         public long  Largest(long below)
         {
-
-            List<long> primeList = Primes.GetPrimeFactorsInNumber(below);
-
-            return primeList.Max();
-
-
+            return Primes.GetPrimeFactorsInNumber(below).Max();
         }
-
-
     }
 }

@@ -9,19 +9,18 @@ namespace jae.euler.lib
     {
         public long GetProductWhereSum(int sum)
         {
-            for (long c = sum; c > 2; c--)
+            for (long c = sum/2; c >=sum/3; c--)
             {
-                for (long b = sum - c; b > 1; b--)
+                for (long b = (sum - c); b > (sum - c)/2; b--)
                 {
                     long a = sum - c - b;
-                    if (a > 0 && Pythagorea.isPythagorea(a, b, c))
+                    if ( Pythagorea.isPythagorea(a, b, c))
                     {
                         return a * b * c;
                     }
                 }
             }
-
-            return 0;
+            throw new Exception("NO product found");
         }
     }
 }
