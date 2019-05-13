@@ -10,5 +10,24 @@ namespace jae.euler.math
                 return ((a * a + b * b) == c * c);
             return false;
         }
+
+
+        public static int GetNumberOfIntegerRightTriangles(int length)
+        {
+            int numberOfIntegerRightTriangles = 0;
+            for (long c = length / 2; c >= length / 3; c--)
+            {
+                for (long b = (length - c); b > (length - c) / 2; b--)
+                {
+                    long a = length - c - b;
+                    if (Pythagorea.isPythagorea(a, b, c))
+                    {
+                        numberOfIntegerRightTriangles++;
+                    }
+                }
+            }
+
+            return numberOfIntegerRightTriangles;
+        }
     }
 }
