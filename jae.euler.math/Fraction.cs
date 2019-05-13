@@ -26,6 +26,29 @@ namespace jae.euler.math
 
         public static Fraction AddFraction(Fraction fraction1, Fraction fraction2)
         {
+
+            try
+            {
+
+            var r=checked(fraction1.Denominator * fraction2.Numerator);
+            var r2 = checked(fraction2.Denominator * fraction1.Numerator);
+            var r3 = checked(fraction2.Denominator * fraction1.Denominator);
+            }
+            catch (Exception)
+            {
+
+                fraction1 = Fraction.ReduceFraction(fraction1);
+                fraction2 = Fraction.ReduceFraction(fraction2);
+
+                var r = checked(fraction1.Denominator * fraction2.Numerator);
+                var r2 = checked(fraction2.Denominator * fraction1.Numerator);
+                var r3 = checked(fraction2.Denominator * fraction1.Denominator);
+            }
+
+
+
+
+
             return new Fraction
             {
 
