@@ -36,17 +36,24 @@ namespace jae.euler.util
 
         }
 
+      
+
+
 
         public static List<int> Product(List<int> numbers1, List<int> numbers2)
         {
-            int ten = 1;
+            long ten = 1;
             List<int> sum = new List<int>();
 
             for (int i=0;i< numbers2.Count;i++)
             {
-                int multiplier = ten*numbers2[i];
-
+                int multiplier = numbers2[i];
                 var temp = Product(numbers1, multiplier);
+                for(int j=0;j<i;j++)
+                {
+                    temp.Insert(0, 0);
+                }
+
                 sum = Sum(sum, temp);
 
                 ten *= 10;
@@ -76,6 +83,7 @@ namespace jae.euler.util
             return sum;
 
         }
+
 
 
 

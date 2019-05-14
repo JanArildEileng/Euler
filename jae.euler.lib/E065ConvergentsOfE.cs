@@ -7,6 +7,41 @@ using System.Text;
 
 namespace jae.euler.lib
 {
+
+    class BigFraction
+    {
+        public List<int> Numerator { get; set; }
+        public List<int> Denominator { get; set; }
+
+        public static BigFraction AddFraction(BigFraction a,BigFraction b)
+        {
+            List<int> t1 = DigitsList.Product(a.Numerator, b.Denominator);
+            List<int> t2 = DigitsList.Product(b.Numerator, a.Denominator);
+            var num = DigitsList.Sum(t1, t2);
+            var dem = DigitsList.Product(a.Denominator, b.Denominator);
+
+            return new BigFraction { Numerator=num,Denominator=dem };
+        }
+
+        public void Invert()
+        {
+            var tmp = Numerator;
+            Numerator = Denominator;
+            Denominator = tmp;
+        }
+
+
+        public static BigFraction ReduceFraction(BigFraction a)
+        {
+         
+            var num = a.Numerator;
+            var dem = a.Denominator;
+
+            return new BigFraction { Numerator = num, Denominator = dem };
+        }
+    }
+
+
     public class E065ConvergentsOfE
     {
         public int GetSumOfDigits(int convergentNumber)
@@ -14,28 +49,29 @@ namespace jae.euler.lib
             //    e =[2; 1,2,1,1,4,1,1,6,1,...,1,2k,1,...].
 
 
-            var aseqvence = new Fraction { Numerator = 2, Denominator = 1 };
+            var aseqvence = new BigFraction { Numerator = new List<int> { 2}, Denominator = new List<int> { 1 } };
 
             if (convergentNumber>1)
             {
                 var a = GetE(1, convergentNumber-1);
-                aseqvence = Fraction.AddFraction(aseqvence, a);
+                aseqvence = BigFraction.AddFraction(aseqvence, a);
 
 
             }
 
-            aseqvence = Fraction.ReduceFraction(aseqvence);
+            aseqvence = BigFraction.ReduceFraction(aseqvence);
 
 
-            if (aseqvence.Numerator < 0)
-                throw new Exception("Numerator <0");
-            if (aseqvence.Denominator < 0)
-                throw new Exception("Denominator <0");
+            //if (aseqvence.Numerator < 0)
+            //    throw new Exception("Numerator <0");
+            //if (aseqvence.Denominator < 0)
+            //    throw new Exception("Denominator <0");
 
 
-            var digitsList = DigitsList.ConvertToDigitListe(aseqvence.Numerator);
+            //   var digitsList = DigitsList.ConvertToDigitListe(aseqvence.Numerator);
+            var digitsList = aseqvence.Numerator;
 
-    
+
 
             var sum = digitsList.Sum();
 
@@ -48,21 +84,21 @@ namespace jae.euler.lib
 
 
 
-        private Fraction GetE(int sequenceNumber,int max)
+        private BigFraction GetE(int sequenceNumber,int max)
         {
             int i;
             if (sequenceNumber % 3 == 1 || sequenceNumber % 3 == 0) i = 1;
             else i = 2 * (1 + sequenceNumber / 3);
 
             if (sequenceNumber==max)
-                return  new Fraction { Numerator = 1, Denominator = i };
+                return  new BigFraction { Numerator = new List<int> { 1 }, Denominator = new List<int> { i } };
 
 
 
-            var iFrac=new Fraction { Numerator = i, Denominator = 1 };
+            var iFrac=new BigFraction { Numerator = new List<int> { i }, Denominator = new List<int> { 1 } };
             var rest = GetE(sequenceNumber +1, max);
 
-            var sum = Fraction.AddFraction(iFrac, rest);
+            var sum = BigFraction.AddFraction(iFrac, rest);
 
             sum.Invert();
 
