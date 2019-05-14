@@ -36,6 +36,28 @@ namespace jae.euler.util
 
         }
 
+
+        public static List<int> Product(List<int> numbers1, List<int> numbers2)
+        {
+            int ten = 1;
+            List<int> sum = new List<int>();
+
+            for (int i=0;i< numbers2.Count;i++)
+            {
+                int multiplier = ten*numbers2[i];
+
+                var temp = Product(numbers1, multiplier);
+                sum = Sum(sum, temp);
+
+                ten *= 10;
+            }
+
+            return sum;
+
+        }
+
+
+
         public static List<int> Product(List<int> numbers1, int maxDigits,int multiplier)
         {
             List<int> sum = new List<int>();

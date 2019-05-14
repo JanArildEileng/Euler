@@ -31,5 +31,37 @@ namespace jae.euler.test.util
 
             Assert.Equal(12345, number);
          }
+
+
+        [Theory]
+        [InlineData(1, 1, 1)]
+        [InlineData(11, 11, 121)]
+        [InlineData(1234, 4567, 5635678)]
+        public void Test_Product_multiplier(int initValue, int multiplier, int expectedResult)
+        {
+          var digitsList = DigitsList.ConvertToDigitListe(initValue);
+          var resultList=DigitsList.Product(digitsList, multiplier);
+          var result = DigitsList.ConvertToNumber(resultList);
+          Assert.Equal(expectedResult, result);
+        }
+
+
+
+        [Theory]
+        [InlineData(1234, 4567, 5635678)]
+        [InlineData(8569, 5723, 49040387)]
+        public void Test_Product_List(int initValue, int multiplier, int expectedResult)
+        {
+            var digitsList1 = DigitsList.ConvertToDigitListe(initValue);
+            var digitsList2 = DigitsList.ConvertToDigitListe(multiplier);
+
+            var resultList = DigitsList.Product(digitsList1, digitsList2);
+            var result = DigitsList.ConvertToNumber(resultList);
+            Assert.Equal(expectedResult, result);
+        }
+
+
+
+
     }
 }
