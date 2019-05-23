@@ -36,7 +36,10 @@ namespace jae.euler.test.level04
 
           
 
-            Assert.Equal("RESPONSIBILITY", "RESPONSIBILITY".ToCharArray().Distinct().ToString());
+            //Assert.Equal("RESPONSIBILITY", "RESPONSIBILITY".ToCharArray().Distinct().ToString());
+
+            Assert.Equal("YOUTH", words.Last());
+
         }
 
 
@@ -47,11 +50,35 @@ namespace jae.euler.test.level04
             /*
              *     CARE with 1, 2, 9, and 6 respectively, we form a square number: 1296 = 362.
              */
-            var words = GetWordsFromFile();
             var sut = new E098AnagramicSquares();
-            Assert.Equal(9216, sut.GetSquareNumber("CARE", words));
+            var words = new List<string> { "ABOVE", "ABSENCE", "ABSOLUTELY", "ACADEMIC", "ACCEPT", "ACCESS", "ACCIDENT", "ACCOMPANY",
+                 "RACE", "CARRER" ,"CARE","ADMINISTRATION"};
+            Assert.Equal(9216, sut.GetLargestSqureNumber(words));
+
+            //         Assert.Equal(9216, sut.GetSquareNumber("CARE", words));
         }
 
+
+
+
+        [Fact]
+        public void Test_GUEST()
+        {
+            /*
+             *     CARE with 1, 2, 9, and 6 respectively, we form a square number: 1296 = 362.
+             */
+            var sut = new E098AnagramicSquares();
+            var words = new List<string> { "GUEST", "ABSENCE", "SUGGEST", "ACADEMIC"};
+            Assert.Equal(8311689, sut.GetLargestSqureNumber(words));
+
+            words = new List<string> { "SUGGEST", "ACADEMIC","GUEST", "ABSENCE", };
+            Assert.Equal(8311689, sut.GetLargestSqureNumber(words));
+
+
+
+
+            //         Assert.Equal(9216, sut.GetSquareNumber("CARE", words));
+        }
 
 
         [Fact]
@@ -60,7 +87,7 @@ namespace jae.euler.test.level04
            
             var words = GetWordsFromFile();
             var sut = new E098AnagramicSquares();
-            Assert.Equal(9216, sut.GetSquareNumber("ADMINISTRATION", words));
+  //          Assert.Equal(9216, sut.GetSquareNumber("ADMINISTRATION", words));
         }
         
 
