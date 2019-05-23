@@ -79,7 +79,25 @@ namespace jae.euler.test.level04
 
             //         Assert.Equal(9216, sut.GetSquareNumber("CARE", words));
         }
+        
 
+
+        [Fact]
+        public void Test_AGREEMENT()
+        {
+            /*
+             *     CARE with 1, 2, 9, and 6 respectively, we form a square number: 1296 = 362.
+             */
+            var sut = new E098AnagramicSquares();
+            var words = new List<string> { "AGREEMENT", "ABSENCE", "GAME", "ACADEMIC" };
+            Assert.Equal(152448409, sut.GetLargestSqureNumber(words));
+
+           
+
+
+
+            //         Assert.Equal(9216, sut.GetSquareNumber("CARE", words));
+        }
 
         [Fact]
         public void Test_ADMINISTRATION()
@@ -113,6 +131,7 @@ namespace jae.euler.test.level04
             var words = GetWordsFromFile();
             var sut = new E098AnagramicSquares();
             Assert.Equal(-1, sut.GetLargestSqureNumber(words));
+           // 46072905316
 
             /*
                 Congratulations, the answer you gave to problem 77 is correct.
