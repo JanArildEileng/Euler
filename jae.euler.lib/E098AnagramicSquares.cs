@@ -33,7 +33,7 @@ namespace jae.euler.lib
 
 
 
-        public long GetLargestSqureNumber(List<string> words)
+        public long GetLargestSqureNumber3(List<string> words)
         {
             long maxSquareNumber = 0;
 
@@ -53,8 +53,9 @@ namespace jae.euler.lib
                 foreach (var word2 in words)
                 {
                     var shortWord2 = f(word2);
-                    if (!word2.Equals(word) && shortWord.StartsWith(shortWord2))
-                    {
+                  //  if (!word2.Equals(word) && shortWord.StartsWith(shortWord2))
+                        if (!word2.Equals(word) && shortWord.Equals(shortWord2))
+                        {
                         {
                             var charArray = word2.ToCharArray();
 
@@ -65,7 +66,7 @@ namespace jae.euler.lib
                                 StringBuilder builder = new StringBuilder();
                                 charArray.Select(c => mapping[c].value).ToList().ForEach(a => builder.Append(a));
                                 var s = builder.ToString();
-                                if (s.StartsWith('0') || s.Length < 2) continue;
+                                if (s.StartsWith('0') ) continue;
 
                                 long value2 = long.Parse(s);
                                 if (IsSquare(value2))
@@ -97,12 +98,14 @@ namespace jae.euler.lib
 
 
 
-        public long GetLargestSqureNumber2(List<string> words)
+        public long GetLargestSqureNumber(List<string> words)
         {
             long maxSquareNumber = 0;
             Func<string, string> f = (w) =>
                {
-                   var a = w.ToCharArray().Distinct().OrderBy(e => e);
+                //   var a = w.ToCharArray().Distinct().OrderBy(e => e);
+                   var a = w.ToCharArray().OrderBy(e => e);
+
                    StringBuilder builder = new StringBuilder();
                    a.ToList().ForEach(e => builder.Append(e));
                    return builder.ToString();
@@ -137,7 +140,7 @@ namespace jae.euler.lib
 
 
 
-
+           
 
 
 
@@ -154,7 +157,7 @@ namespace jae.euler.lib
 
 
                         //test de andre ordene i samme gruppe
-                        /*
+                       
                         foreach (var wordStruct in g.Skip(i + 1))
                         {
                             var charArray = wordStruct.OrgWord.ToCharArray();
@@ -183,94 +186,13 @@ namespace jae.euler.lib
 
                                 }
                             }
-                        } */ 
+                        } 
                         
                     //samme gruppe
-                          //test sub grupps
-
-                        foreach (var word in words)
-                        {
-                            var shortWord = f(word);
-                            if (!shortWord.Equals(key) && key.StartsWith(shortWord))
-                            {
-                                {
-                                    var charArray = word.ToCharArray();
-
-                                    foreach (subStruct substruct in subStructListe)
-                                    {
-                                        var mapping = substruct.mapping;
-
-                                        StringBuilder builder = new StringBuilder();
-                                        charArray.Select(c => mapping[c].value).ToList().ForEach(a => builder.Append(a));
-                                        var s = builder.ToString();
-                                        if (s.StartsWith('0')  || s.Length<2)  continue;
-
-                                        long value2 = long.Parse(s);
-                                        if (IsSquare(value2))
-                                        {
-                                            var value = substruct.value;
-                                            long max1 = Math.Max(value, value2);
-                                            maxSquareNumber = Math.Max(maxSquareNumber, max1);
-
-                                            if (maxSquareNumber == 152448409)
-                                            {
-                                                var d = 1;
-                                            }
-
-
-                                        }
-                                    }
-                                }
-
-
-                            }
-                        }
-
-
-                        /*
-                        foreach (var g2 in wordgroups)
-                        {
-                            var key2 = g2.Key;
-                            if (!key2.Equals(key) && key.StartsWith(key2))
-                            {
-                                var aaaa = 1;
-                                foreach (var wordStruct in g2)
-                                {
-                                    var charArray = wordStruct.OrgWord.ToCharArray();
-
-                                    foreach (subStruct substruct in subStructListe)
-                                    {
-                                        var mapping = substruct.mapping;
-
-                                        StringBuilder builder = new StringBuilder();
-                                        charArray.Select(c => mapping[c].value).ToList().ForEach(a => builder.Append(a));
-                                        var s = builder.ToString();
-                                        if (s.StartsWith('0')) continue;
-
-                                        long value2 = long.Parse(s);
-                                        if (IsSquare(value2))
-                                        {
-                                            var value = substruct.value;
-                                            long max1 = Math.Max(value, value2);
-                                            maxSquareNumber = Math.Max(maxSquareNumber, max1);
-
-                                            if (maxSquareNumber == 8311689)
-                                            {
-                                                var d = 1;
-                                            }
-
-
-                                        }
-                                    }
-                                }
-                            }
-                        }  //g2
-                        */
+                     
+                                           
 
                     }
-
-
-
 
                 }  //acer
 
