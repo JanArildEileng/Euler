@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 
 namespace jae.euler.lib
@@ -8,266 +7,87 @@ namespace jae.euler.lib
     public class E098AnagramicSquares
     {
 
-        class subStruct
+        private class SquareNumberSubstitution
         {
-            public long value { get; set; }
-            public List<int> selected { get; set; }
-
-
-            public Dictionary<char, Mapping> mapping { get; set; }
-
+            public long number { get; set; }
+            public Dictionary<char, int> substitutionMapping { get; set; }
         }
-
-        class Mapping
-        {
-            public char c { get; set; }
-            public int value { get; set; }
-        }
-
-
-        class WordStruct
-        {
-            public string OrgWord { get; set; }
-            public string ShortDistinctWord { get; set; }
-        }
-
-
-
-        public long GetLargestSqureNumber3(List<string> words)
-        {
-            long maxSquareNumber = 0;
-
-            Func<string, string> f = (w) =>
-            {
-                var a = w.ToCharArray().Distinct().OrderBy(e => e);
-                StringBuilder builder = new StringBuilder();
-                a.ToList().ForEach(e => builder.Append(e));
-                return builder.ToString();
-            };
-
-            foreach (var word in words)
-            {
-                var shortWord = f(word);
-                List<subStruct> subStructListe = GetSubStruct(word);
-
-                foreach (var word2 in words)
-                {
-                    var shortWord2 = f(word2);
-                  //  if (!word2.Equals(word) && shortWord.StartsWith(shortWord2))
-                        if (!word2.Equals(word) && shortWord.Equals(shortWord2))
-                        {
-                        {
-                            var charArray = word2.ToCharArray();
-
-                            foreach (subStruct substruct in subStructListe)
-                            {
-                                var mapping = substruct.mapping;
-
-                                StringBuilder builder = new StringBuilder();
-                                charArray.Select(c => mapping[c].value).ToList().ForEach(a => builder.Append(a));
-                                var s = builder.ToString();
-                                if (s.StartsWith('0') ) continue;
-
-                                long value2 = long.Parse(s);
-                                if (IsSquare(value2))
-                                {
-                                    var value = substruct.value;
-                                    long max1 = Math.Max(value, value2);
-                                    maxSquareNumber = Math.Max(maxSquareNumber, max1);
-
-                                    if (maxSquareNumber == 152448409)
-                                    {
-                                        var d = 1;
-                                    }
-
-
-                                }
-                            }
-                        }
-
-
-                    }
-                }
-
-
-
-            }
-
-            return maxSquareNumber;
-        }
-
-
 
         public long GetLargestSqureNumber(List<string> words)
         {
             long maxSquareNumber = 0;
-            Func<string, string> f = (w) =>
-               {
-                //   var a = w.ToCharArray().Distinct().OrderBy(e => e);
-                   var a = w.ToCharArray().OrderBy(e => e);
+            Func<string, string> stringToSortetString = (w) => { return String.Join("", w.ToCharArray().OrderBy(e => e)); };
 
-                   StringBuilder builder = new StringBuilder();
-                   a.ToList().ForEach(e => builder.Append(e));
-                   return builder.ToString();
-               };
+            var anagramGroups = words.GroupBy(e => stringToSortetString(e)).Where(g => g.Count() > 1).OrderByDescending(g => g.Key.Length); ;
 
-            var wordstructs = words.Select(w => new WordStruct { OrgWord = w, ShortDistinctWord = f(w) });
-
-            var wordgroups = wordstructs.GroupBy(e => e.ShortDistinctWord).Where(g => g.Count() > 1).OrderByDescending(g => g.Key.Length); ;
-
-            //       var keys = wordgroups.Select(g => g.Key).ToList();
-
-
-
-            ////       foreach (var key in keys)
-            //           foreach (var g in wordgroups)
-            //           {
-            //           var key = g.Key;
-
-            //           var sublist = keys.Where(k =>!k.Equals(key) &&  key.StartsWith(k)).ToList();
-            //           if (sublist.Count >0)
-            //           {
-            //               var a =1;
-
-
-            //           }
-
-
-            //       }
-
-
-
-
-
-
-           
-
-
-
-            foreach (var g in wordgroups)
+            foreach (var anagram in anagramGroups)
             {
-                var key = g.Key;
-                //if (key.Equals("EGSTU"))
+                for (int i = 0; i < (anagram.Count() - 1); i++)
                 {
-                    for (int i = 0; i < (g.Count() - 1); i++)
-                    {
-                        var orgWord = g.ElementAt(i).OrgWord;
+                     List<SquareNumberSubstitution> squareNumberSubstitutionListe = GetSubStruct(anagram.ElementAt(i));
 
-                        List<subStruct> subStructListe = GetSubStruct(orgWord);
+                    //test de andre ordene i samme gruppe
 
+                    foreach (var anagramMember in anagram.Skip(i + 1))
+                    {               
+                        foreach (var squareNumberSubstitution in squareNumberSubstitutionListe)
+                        {                                        
+                            string s = String.Join("", anagramMember.ToCharArray().Select(c => squareNumberSubstitution.substitutionMapping[c]).ToArray());
+                            if (s.StartsWith('0')) continue;
 
-                        //test de andre ordene i samme gruppe
-                       
-                        foreach (var wordStruct in g.Skip(i + 1))
-                        {
-                            var charArray = wordStruct.OrgWord.ToCharArray();
-
-                            foreach (subStruct substruct in subStructListe)
-                            {
-                                var mapping = substruct.mapping;
-
-                                StringBuilder builder = new StringBuilder();
-                                charArray.Select(c => mapping[c].value).ToList().ForEach(a => builder.Append(a));
-                                var s = builder.ToString();
-                                if (s.StartsWith('0')) continue;
-
-                                long value2 = long.Parse(s);
-                                if (IsSquare(value2))
-                                {
-                                    var value = substruct.value;
-                                    long max1 = Math.Max(value, value2);
-                                    maxSquareNumber = Math.Max(maxSquareNumber, max1);
-
-                                    if (maxSquareNumber == 8311689)
-                                    {
-                                        var d = 1;
-                                    }
-
-
-                                }
+                            long value2 = long.Parse(s);
+                            if (IsSquare(value2))
+                            {                        
+                                 maxSquareNumber=(new List<long>{ squareNumberSubstitution.number, value2, maxSquareNumber }).Max();
                             }
-                        } 
-                        
-                    //samme gruppe
-                     
-                                           
-
+                        }
                     }
 
-                }  //acer
-
-
-            }
-
-
-
+                    //samme gruppe
+                } ///i
+            } //anagram
 
             return maxSquareNumber;
         }
 
-
-
-
-
-        private List<subStruct> GetSubStruct(string word)
+        private List<SquareNumberSubstitution> GetSubStruct(string word)
         {
-            List<subStruct> SquareNumbers = new List<subStruct>();
+            List<SquareNumberSubstitution> SquareNumbers = new List<SquareNumberSubstitution>();
             var warray = word.ToCharArray();
             IEnumerable<char> wordDistinct = warray.Distinct();
 
-
-            Action<subStruct> action = (a) =>
+            Action<SquareNumberSubstitution> action = (a) =>
             {
                 SquareNumbers.Add(a);
             };
-
-
-            //  int[] intvalues = Enumerable.Range(1,11).ToArray();
-            int[] intvalues = Enumerable.Range(0, 10).ToArray();
-
-            Recursive(intvalues.ToList(), new List<int>(), warray, wordDistinct, action);
+       
+            Recursive(Enumerable.Range(0, 10).ToList(), new List<int>(), warray, wordDistinct, action);
             return SquareNumbers;
         }
 
 
-
-
-
-        private void Recursive(List<int> canddates, List<int> selected, char[] word, IEnumerable<char> wordDistinct, Action<subStruct> action)
+        private void Recursive(List<int> canddates, List<int> selected, char[] word, IEnumerable<char> wordDistinct, Action<SquareNumberSubstitution> action)
         {
             if (selected.Count == wordDistinct.Count())
             {
                 int i = 0;
-                var mapping = wordDistinct.Select(c => new Mapping { c = c, value = selected[i++] }).ToDictionary(e => e.c);
+                var substitutionMapping = wordDistinct.Select(c => new { c, value = selected[i++] }).ToDictionary(e => e.c, e => e.value);
 
-                StringBuilder builder = new StringBuilder();
-                word.Select(c => mapping[c].value).ToList().ForEach(a => builder.Append(a));
-
-                var s = builder.ToString();
-
+                string s = String.Join("", word.Select(c => substitutionMapping[c]).ToArray());
                 if (s.StartsWith('0')) return;
 
-                try
+                long number = long.Parse(s);
+                if (IsSquare(number))
                 {
-                    long value = long.Parse(s);
-                    if (IsSquare(value))
-                    {
-                        action(new subStruct { value = value, selected = selected, mapping = mapping });
-                    }
-                }
-                catch (Exception)
-                {
-
-                    throw;
+                    action(new SquareNumberSubstitution { number = number, substitutionMapping = substitutionMapping });
                 }
 
                 return;
             }
 
 
-            int skip = 0;
-            if (selected.Count() == 0) skip = 1;
-
+            int skip = selected.Count() == 0?1:0;
+       
             foreach (var candiate in canddates.Skip(skip))
             {
                 var a = selected.ToList();
@@ -275,12 +95,7 @@ namespace jae.euler.lib
                 var subcanddates = canddates.Except(new List<int> { candiate }).ToList();
                 Recursive(subcanddates, a, word, wordDistinct, action);
             }
-
-
         }
-
-
-
 
 
 
@@ -288,7 +103,6 @@ namespace jae.euler.lib
         {
             long a = (long)Math.Sqrt(number);
             return (a * a == number);
-
         }
     }
 }
