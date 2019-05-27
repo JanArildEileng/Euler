@@ -1,5 +1,4 @@
 ﻿using jae.euler.lib;
-using System;
 using Xunit;
 
 namespace jae.euler.test.level01
@@ -14,11 +13,7 @@ namespace jae.euler.test.level01
            */
 
             var sut = new E007_10001stprime();
-
-            long expected = 13;
-            var value = sut.GetPrimeNumber(6);
-            Assert.Equal(expected, value);
-
+            Assert.Equal(13, sut.GetPrimeNumber(6));
         }
 
         [Fact]
@@ -27,19 +22,14 @@ namespace jae.euler.test.level01
             /*
             
                 What is the 10 001st prime number?
-       */
+           */
 
-
-            var sut = new E007_10001stprime();
-
-            long expected = 104743;
-            var value = sut.GetPrimeNumber(10001);
-            Assert.Equal(expected, value);
+            var sut = new E007_10001stprime();     
+            Assert.Equal(104743, sut.GetPrimeNumber(10001));
 
             /*
-                    Congratulations, the answer you gave to problem 7 is correct.
-
-                        You are the 368949th person to have solved this problem.
+               Congratulations, the answer you gave to problem 7 is correct.
+               You are the 368949th person to have solved this problem.
             */
 
         }
