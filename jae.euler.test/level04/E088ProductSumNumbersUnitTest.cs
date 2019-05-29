@@ -19,10 +19,10 @@ namespace jae.euler.test.level04
 
         [Theory]
         [InlineData(2,4)]
-        [InlineData(3, 6)]
-        [InlineData(4, 8)]
-        [InlineData(5, 8)]
-        [InlineData(6, 12)]
+        //[InlineData(3, 6)]
+        //[InlineData(4, 8)]
+        //[InlineData(5, 8)]
+        //[InlineData(6, 12)]
         public void Test_GetMinimalProduct(int k, int expectedMinimalProductSum)
         {
             var sut = new E088ProductSumNumbers();

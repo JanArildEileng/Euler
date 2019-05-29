@@ -15,33 +15,44 @@ namespace jae.euler.lib
         public int GetMinimalProduct(int k)
         {
             //   k=2: 4 = 2 × 2 = 2 + 2
-            int[] numbers = Enumerable.Repeat(1, k).ToArray();
+            int[] numbers = Enumerable.Repeat(1, 1).ToArray();
 
-            int minimalProduct = Recursive(numbers);
+            int minimalProduct = Recursive(numbers,k);
 
 
             return minimalProduct;
         }
 
 
-        private int Recursive(int[] numbers)
+        private int Recursive(int[] numbers,int k)
         {
 
-            int sum = numbers.Sum();
+            int sum = numbers.Sum()+k-numbers.Length;
             int product = numbers.Aggregate(1, (p, next) => p * next);
-            if (sum == product) return sum;
+            if (sum == product)
+                return sum;
             if (product > sum) return -1;
 
 
-            var sortedNumers=numbers.OrderBy(e => e).ToArray();
+            var sortedNumers=numbers.Distinct().OrderBy(e => e).ToArray();
+            //    int[] clone = (int[])sortedNumers.Clone();
 
-            for(int i=0;i< sortedNumers.Length;i++)
+            int step = 1;
+
+            for (int i=0;i< sortedNumers.Length;i++)
             {
-                int[] clone =(int[] ) sortedNumers.Clone();
-                clone[i] = clone[i] + 1;
-                int a = Recursive(clone);
+                int[] clone = Enumerable.Repeat(1, 1).ToArray();
+
+
+
+              //  int[] clone =(int[] ) sortedNumers.Clone();
+                clone[i] = clone[i] + step;
+                int a = Recursive(clone,k);
                 if (a > 0) return a;
-                if (a < 0) break;
+                if (a < 0)
+                {
+                    break;
+                }
 
 
             }
