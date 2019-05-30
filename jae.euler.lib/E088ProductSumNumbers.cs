@@ -15,7 +15,7 @@ namespace jae.euler.lib
         public int GetMinimalProduct(int k)
         {
             //   k=2: 4 = 2 × 2 = 2 + 2
-            int[] numbers = Enumerable.Repeat(1, 1).ToArray();
+            int[] numbers = Enumerable.Repeat(1, k).ToArray();
 
             int minimalProduct = Recursive(numbers,k);
 
@@ -34,30 +34,44 @@ namespace jae.euler.lib
             if (product > sum) return -1;
 
 
-            var sortedNumers=numbers.Distinct().OrderBy(e => e).ToArray();
+            numbers = numbers.OrderBy(e => e).ToArray();
+
+            var uniq = numbers.Distinct().OrderBy(e => e).ToArray();
             //    int[] clone = (int[])sortedNumers.Clone();
 
             int step = 1;
 
-            for (int i=0;i< sortedNumers.Length;i++)
+            List<int> liste = new List<int>(uniq.Count());
+
+
+            for (int i=0;i< numbers.Length;i++)
             {
-                int[] clone = Enumerable.Repeat(1, 1).ToArray();
-
-
-
-              //  int[] clone =(int[] ) sortedNumers.Clone();
+                int e = numbers[i];
+                if (liste.Contains(e)) continue;
+                else liste.Add(e);
+                int[] clone = (int[])numbers.Clone();          
                 clone[i] = clone[i] + step;
                 int a = Recursive(clone,k);
                 if (a > 0) return a;
                 if (a < 0)
                 {
-                    break;
+                    break; ;
                 }
 
 
             }
 
             return 0;
+        }
+
+
+        private int[] Create(int[] uniq,int k)
+        {
+            int[] a = Enumerable.Repeat(1, k).ToArray();
+            for (int i = 0; i < uniq.Length; i++)
+                a[i] = uniq[i];
+            return a;
+
         }
 
 
