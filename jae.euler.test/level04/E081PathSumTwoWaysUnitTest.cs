@@ -9,36 +9,44 @@ namespace jae.euler.test.level04
     public class E081PathSumTwoWaysUnitTest
     {
 
-        private int[][] ReadMatrix()
+      
+        private int[,] ReadMatrix()
         {
-            int[][] matrix = new int[80][];
+            int[,] matrix = new int[80,80];
 
-            int i = 0;
+            int y = 0;
             foreach (var line in File.ReadAllLines(@"DataFiles\p081_matrix.txt"))
             {
-                matrix[i++] = line.Split(',').Select(e => int.Parse(e)).ToArray();
+                int x = 0;
+                foreach(int number  in line.Split(',').Select(e => int.Parse(e)))
+                {  
+                    matrix[y, x++] = number;
+
+                }
+                y++;
+
             }
 
             return matrix;
         }
-
-
+  
 
         [Fact]
-        public void Test_0()
+        public void Test_1()
         {
-            int[][] matrix =
+            int[,] matrix =
             {
-                new int[] {131,673,234,103,18 },
-                new int[] {201,96,342,965,150 },
-                new int[] {630,803,746,422,111},
-                new int[] {537,699,497,121,956},
-                new int[] {805,732,524,37,331}
+                {131,673,234,103,18 },
+                {201,96,342,965,150 },
+                {630,803,746,422,111},
+                {537,699,497,121,956},
+                {805,732,524,37,331}
             };
 
             var sut = new E081PathSumTwoWays();
             Assert.Equal(2427, sut.GetMinimalPathSum(matrix));
-         }
+        }
+
 
 
         [Fact]
