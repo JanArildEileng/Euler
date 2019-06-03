@@ -103,7 +103,9 @@ namespace jae.euler.math
 
         public static bool IsPrime(long number, List<long> primliste)
         {
-            long sq = (long)Math.Sqrt((double)number)+1;
+            long sq = (long)Math.Sqrt((double)number);
+
+            if (primliste.Count == 0 && number>1) return true;
 
             for (int i = 0; i < primliste.Count; i++)
             {

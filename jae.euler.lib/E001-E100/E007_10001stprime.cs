@@ -1,48 +1,31 @@
-﻿using System;
+﻿using jae.euler.math;
 using System.Collections.Generic;
-using System.Text;
 
 namespace jae.euler.lib
 {
     public class E007_10001stprime
     {
-        public object GetPrimeNumber(long primenr)
+        public long GetPrimeNumber(long primenr)
         {
             var listPrimeNumber = new List<long>();
-
-            long prime = 2;
-
-            listPrimeNumber.Add(prime);
+            long current = 1;
 
             while (listPrimeNumber.Count < primenr)
             {
-                prime = GetNextPrime(prime, listPrimeNumber);
-                listPrimeNumber.Add(prime);
+                current = GetNextPrime(current + 1, listPrimeNumber);
+                listPrimeNumber.Add(current);
             }
 
-
-            return prime;
+            return current;
         }
 
-        private long GetNextPrime(long prime, List<long> listPrimeNumber)
+        private long GetNextPrime(long next, List<long> listPrimeNumber)
         {
-            var next = prime;
-
-            while ( !IsPrime(next, listPrimeNumber))
+            while (!Primes.IsPrime(next, listPrimeNumber))
             {
                 next++;
             }
             return next;
-        }
-
-        private bool IsPrime(long next, List<long> listPrimeNumber)
-        {
-            for(int i=0;i< listPrimeNumber.Count;i++)
-            {
-                if (next % listPrimeNumber[i] == 0) return false;
-            }
-
-            return true;
         }
     }
 }
