@@ -51,8 +51,10 @@ namespace jae.euler.test.level04
              *     CARE with 1, 2, 9, and 6 respectively, we form a square number: 1296 = 362.
              */
             var sut = new E098AnagramicSquares();
-            var words = new List<string> { "ABOVE", "ABSENCE", "ABSOLUTELY", "ACADEMIC", "ACCEPT", "ACCESS", "ACCIDENT", "ACCOMPANY",
-                 "RACE", "CARRER" ,"CARE","ADMINISTRATION"};
+            //var words = new List<string> { "ABOVE", "ABSENCE", "ABSOLUTELY", "ACADEMIC", "ACCEPT", "ACCESS", "ACCIDENT", "ACCOMPANY",
+            //     "RACE", "CARRER" ,"CARE","ADMINISTRATION"};
+            var words = new List<string> { "CARE", "RACE", "CARRER" ,};
+
             Assert.Equal(9216, sut.GetLargestSqureNumber(words));
 
             //         Assert.Equal(9216, sut.GetSquareNumber("CARE", words));
@@ -119,7 +121,9 @@ namespace jae.euler.test.level04
              */
 
             var sut = new E098AnagramicSquares();
-        
+            var words = new List<string> { "CONSIDERABLE", "RELATIONSHIP", "RESPONSIBILITY", "ACADEMIC" };
+            Assert.Equal(152448409, sut.GetLargestSqureNumber(words));
+
         }
 
         [Fact]

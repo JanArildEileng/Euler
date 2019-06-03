@@ -14,7 +14,7 @@ namespace jae.euler.lib
             public List<int> selected { get; set; }
 
 
-            public Dictionary<char, Mapping> mapping { get; set; }
+            public Dictionary<char, int> mapping { get; set; }
 
         }
 
@@ -30,6 +30,12 @@ namespace jae.euler.lib
             public string OrgWord { get; set; }
             public string ShortDistinctWord { get; set; }
         }
+
+
+       
+
+
+
 
 
 
@@ -48,6 +54,9 @@ namespace jae.euler.lib
             foreach (var word in words)
             {
                 var shortWord = f(word);
+
+        //        if (shortWord.Length < 11) continue;
+
                 List<subStruct> subStructListe = GetSubStruct(word);
 
                 foreach (var word2 in words)
@@ -63,7 +72,7 @@ namespace jae.euler.lib
                                 var mapping = substruct.mapping;
 
                                 StringBuilder builder = new StringBuilder();
-                                charArray.Select(c => mapping[c].value).ToList().ForEach(a => builder.Append(a));
+                                charArray.Select(c => mapping[c]).ToList().ForEach(a => builder.Append(a));
                                 var s = builder.ToString();
                                 if (s.StartsWith('0') || s.Length < 2) continue;
 
@@ -201,7 +210,7 @@ namespace jae.euler.lib
                                         var mapping = substruct.mapping;
 
                                         StringBuilder builder = new StringBuilder();
-                                        charArray.Select(c => mapping[c].value).ToList().ForEach(a => builder.Append(a));
+                                        charArray.Select(c => mapping[c]).ToList().ForEach(a => builder.Append(a));
                                         var s = builder.ToString();
                                         if (s.StartsWith('0')  || s.Length<2)  continue;
 
@@ -301,7 +310,7 @@ namespace jae.euler.lib
 
 
             //  int[] intvalues = Enumerable.Range(1,11).ToArray();
-            int[] intvalues = Enumerable.Range(0, 10).ToArray();
+            int[] intvalues = Enumerable.Range(0, 11).ToArray();
 
             Recursive(intvalues.ToList(), new List<int>(), warray, wordDistinct, action);
             return SquareNumbers;
@@ -316,12 +325,9 @@ namespace jae.euler.lib
             if (selected.Count == wordDistinct.Count())
             {
                 int i = 0;
-                var mapping = wordDistinct.Select(c => new Mapping { c = c, value = selected[i++] }).ToDictionary(e => e.c);
-
-                StringBuilder builder = new StringBuilder();
-                word.Select(c => mapping[c].value).ToList().ForEach(a => builder.Append(a));
-
-                var s = builder.ToString();
+                var mapping = wordDistinct.Select(c => new { c, value = selected[i++] }).ToDictionary(e => e.c,e=>e.value);            
+                var s = String.Join("", word.Select(c => mapping[c]).ToArray());
+           
 
                 if (s.StartsWith('0')) return;
 
