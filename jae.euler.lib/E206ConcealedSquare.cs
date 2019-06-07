@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace jae.euler.lib
 {
@@ -16,77 +17,29 @@ namespace jae.euler.lib
 
         public long Square()
         {
-            for (long i = 1010101010; i < 1010101030; i++)
-            {
+        //    Regex regex = new Regex(@"1\d{1}2\d{1}3\d{1}4\d{1}5\d{1}6\d{1}7\d{1}8\d{1}9\d{1}0");
 
+            for (long i = 1010101010; i < 3120202030; i+=10)
+            {
                 BigInteger square=i*i;
 
+        
                 var st = square.ToString();
                 if ( st.Length >19) throw new Exception($"to long square  {i}");
                 if (st.Length < 19) continue;
 
-                if (st[0]=='1' && st[2] == '2' && st[4] == '3' && st[6] == '4')
-                {
-                    if (st[8] == '5')
-                    {
-                        var a = 1;
-                    }
-                   
-                }
 
-
-            }
-
-            throw new Exception($"not found");
-
-        }
-
-
-
-            public long Square2()
-        {
-        
-
-
-
-                   
-            for (long i=1010101010;i< 1010101020; i++)
-            {
-                List<int> liste1 = DigitsList.ConvertToDigitListe(i);
+         //       if  ( regex.IsMatch(st))
+          //          return i;
              
-
-                List<int> square = DigitsList.Product(liste1, liste1);
-
-                if (square.Count < 19) continue;
-                if (square.Count > 19) throw new Exception($"to long square  {i}");
-
-
-                square = DigitsList.ReverseCopy(square);
-
-                bool a = true;
-
-                for(int p=1;p<10;p++)
-                {
-                    //if (square[2 * p - 2] > p)
-                    //    throw new Exception($"to big {i} {p}  {square[2 * p - 2]}");
-
-
-                    if (square[2 *p -2 ] != p)
+               
+                if ( st[0]=='1' &&  st[2]=='2' &&  st[4]=='3' &&  st[6]=='4' &&           
+                     st[8]=='5' && st[10]=='6' && st[12]=='7' && st[14]=='8' &&
+                    st[16]=='9' && st[18]=='0')
                     {
-                        a = false;
-                        break;
-                    }
-                }
-
-                if (square[18] != 0)
-                {
-                    a = false;
-                 
-                }
-
-                if (a) return i;
-
-                
+                        return i;
+                    }                 
+                             
             }
 
             throw new Exception($"not found");

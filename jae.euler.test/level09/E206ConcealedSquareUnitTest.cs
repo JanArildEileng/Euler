@@ -1,22 +1,18 @@
 ﻿using jae.euler.lib;
+using System.Text.RegularExpressions;
 using Xunit;
 
 namespace jae.euler.test.level09
 {
     public class E206ConcealedSquareUnitTest
     {
-
-        //[Theory]
-        //[InlineData(29, 1)]
-        //[InlineData(34, 2)]
-        //[InlineData(48, 3)]
-        //[InlineData(50, 4)]
-        //public void Test_1(int below, int expectedCount)
-        //{
-        //    var sut = new E206ConcealedSquare();
-        
-        //}
-
+        [Fact]
+        public void Test_Regex()
+        {
+            Regex regex = new Regex(@"1\d{1}2\d{1}3\d{1}4\d{1}5\d{1}6\d{1}7\d{1}8\d{1}9\d{1}0");
+            Assert.Matches(regex, "1020304050607080900");
+        }
+     
 
         [Fact]
         public void Solution()
@@ -27,10 +23,12 @@ namespace jae.euler.test.level09
             */
 
             var sut = new E206ConcealedSquare();
-            Assert.Equal(-1, sut.Square());
+            Assert.Equal(1389019170, sut.Square());
 
             /*
-             * 
+             Congratulations, the answer you gave to problem 206 is correct.
+             You are the 21334th person to have solved this problem.
+             This problem had a difficulty rating of 5%.
             */
         }
     }
