@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.IO;
 
 namespace jae.euler.lib
 {
@@ -11,20 +12,23 @@ namespace jae.euler.lib
         public int GetTopLeftCorner(int[][] sudoku)
         {
 
-            while (solveStep1(sudoku) >0)
+            HashSet<int>[,] set = InitHashSet(sudoku);
+
+
+            while (solveStep1(sudoku, set) > 0)
             {
 
             }
-          
 
-            return (100*sudoku[0][0]+ 10*sudoku[0][1]+ sudoku[0][2]);
+
+            return (100 * sudoku[0][0] + 10 * sudoku[0][1] + sudoku[0][2]);
         }
 
         public int GetSumTopLeftCorner(List<int[][]> sudokus)
         {
             int sumTopLeftCorner = 0;
 
-            foreach(var sudoku in sudokus)
+            foreach (var sudoku in sudokus)
             {
                 sumTopLeftCorner += GetTopLeftCorner(sudoku);
             }
@@ -34,11 +38,10 @@ namespace jae.euler.lib
 
 
 
-
-        private int solveStep1(int[][] sudoku)
+        private HashSet<int>[,] InitHashSet(int[][] sudoku)
         {
-            HashSet<int>[,] set = new HashSet<int>[9,9]; 
-            for(int i=0;i<9;i++)
+            HashSet<int>[,] set = new HashSet<int>[9, 9];
+            for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
                 {
@@ -46,62 +49,73 @@ namespace jae.euler.lib
                         set[i, j] = new HashSet<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
                 }
             }
+            return set;
+        }
+
+
+         private int solveStep1(int[][] sudoku, HashSet<int>[,] set)
+        {
+           
 
             for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    if (set[i, j]  !=null)
+                    if (set[i, j] != null)
                     {
                         set[i, j] = set[i, j].Except(GetUsedRow(sudoku, i)).ToHashSet();
                         set[i, j] = set[i, j].Except(GetUsedCol(sudoku, j)).ToHashSet();
-                        set[i, j] = set[i, j].Except(GetUseBox(sudoku,i, j)).ToHashSet();
-                
+                        set[i, j] = set[i, j].Except(GetUseBox(sudoku, i, j)).ToHashSet();
+
                     }
-                      
+
                 }
             }
 
-            int count=0;
+            int count = 0;
 
             for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    if (sudoku[i][j] == 0 && set[i, j].Count==1)
+                    if (sudoku[i][j] == 0 && set[i, j].Count == 1)
                     {
                         sudoku[i][j] = set[i, j].First();
+                        set[i, j] = null;
                         count++;
                     }
-                       
+
                 }
             }
 
-           
-            if (count==0)
+
+
+            if (count == 0 && GetUnsolved(sudoku)>0)
             {
 
-                for (int i = 0; i < 9; i++)
+                var file = File.CreateText(@"c:\tmp\sudoku.txt");
+                for (int row = 0; row < 9; row++)
                 {
-                    for (int j = 0; j < 9; j++)
+                    StringBuilder builder=new StringBuilder();
+                    for(int col=0;col<9;col++)
                     {
-                        if (sudoku[i][j] == 0)
-                        {
-
-                            var a = 1;
-                        }
-
+                        builder.Append($"{sudoku[row][col]}");
                     }
+                    file.WriteLine(builder.ToString());
                 }
-
+                file.Close();
+                throw new Exception("Not solved");
 
             }
 
-                
-           return count;
+
+            
+
+
+            return count;
         }
 
-        private List<int> GetUsedRow(int[][] sudoku,int row)
+        private List<int> GetUsedRow(int[][] sudoku, int row)
         {
             return sudoku[row].Where(e => e != 0).ToList();
 
@@ -109,7 +123,7 @@ namespace jae.euler.lib
         private List<int> GetUsedCol(int[][] sudoku, int col)
         {
             List<int> list = new List<int>();
-            for (int row=0;row<9;row++)
+            for (int row = 0; row < 9; row++)
             {
                 if (sudoku[row][col] != 0)
                     list.Add(sudoku[row][col]);
@@ -118,7 +132,7 @@ namespace jae.euler.lib
             return list;
         }
 
-        private List<int> GetUseBox(int[][] sudoku,int row, int col)
+        private List<int> GetUseBox(int[][] sudoku, int row, int col)
         {
             List<int> list = new List<int>();
 
@@ -143,5 +157,21 @@ namespace jae.euler.lib
         }
 
 
+        private int GetUnsolved(int[][] sudoku)
+        {
+            int unsolved = 0;
+
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    if (sudoku[i][j] == 0)
+                    {
+                        unsolved++;
+                    }
+                }
+            }
+            return unsolved;
+        }
     }
 }
