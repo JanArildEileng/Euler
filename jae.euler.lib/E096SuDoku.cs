@@ -7,6 +7,17 @@ using System.IO;
 namespace jae.euler.lib
 {
 
+   
+    public struct HashStruct {
+        internal int first;
+        internal int second;
+        internal int box;
+
+        public HashSet<int> set { get; set; }
+        public int row { get; set; }
+        public int col { get; set; }
+      }
+
     public class E096SuDoku
     {
         public int GetTopLeftCorner(int[][] sudoku)
@@ -55,8 +66,8 @@ namespace jae.euler.lib
 
          private int solveStep1(int[][] sudoku, HashSet<int>[,] set)
         {
-           
 
+        
             for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
@@ -71,6 +82,15 @@ namespace jae.euler.lib
 
                 }
             }
+
+            //find all included in 2's
+
+
+            //if (Test1(set))
+            //    return 1;
+
+            Test1(set);
+            
 
             int count = 0;
 
@@ -93,6 +113,9 @@ namespace jae.euler.lib
             if (count == 0 && GetUnsolved(sudoku)>0)
             {
 
+                if (Test1(set))
+                    return 1;
+
                 var file = File.CreateText(@"c:\tmp\sudoku.txt");
                 for (int row = 0; row < 9; row++)
                 {
@@ -104,6 +127,11 @@ namespace jae.euler.lib
                     file.WriteLine(builder.ToString());
                 }
                 file.Close();
+
+           
+
+                RecursiveTry(sudoku);
+
                 throw new Exception("Not solved");
 
             }
@@ -114,6 +142,8 @@ namespace jae.euler.lib
 
             return count;
         }
+
+     
 
         private List<int> GetUsedRow(int[][] sudoku, int row)
         {
@@ -157,6 +187,173 @@ namespace jae.euler.lib
         }
 
 
+        private bool Test1(HashSet<int>[,] set)
+        {
+            bool t = false;
+
+            List<HashStruct> list = new List<HashStruct>();
+
+
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    if ( set[i,j] != null && set[i, j].Count==2)
+                    {
+                        int box = GetBox(i, j);
+                        var h = new HashStruct { set = set[i, j], row = i, col = j, first = set[i, j].ElementAt(0), second = set[i, j].ElementAt(1), box = box };
+                        list.Add(h);
+                    }
+                }
+            }
+
+
+            foreach (var g in list.GroupBy(l => l.row))
+            {
+                foreach (var g2 in g.GroupBy(h => h.first))
+                {
+
+                    if (g2.Count() == 2 && g2.ElementAt(0).second == g2.ElementAt(1).second)
+                    {
+                        var copy = new HashSet<int>()
+                        {
+                            g2.ElementAt(0).first,
+                            g2.ElementAt(0).second,
+
+                        };
+                        //fjern alle andre fra row,col.box
+                        for (int i = 0; i < 2; i++)
+                        {
+                            int r = g2.ElementAt(i).row;
+                            int c = g2.ElementAt(i).col;
+                            int box = GetBox(r, c);
+                            //fjern fra row
+                            for (int x = 0; x < 9; x++)
+                            {
+                                if (r == 0 && x == 8)
+                                {
+                                    var d = 1;
+                                }
+                                if (set[r, x] != null)
+                                    set[r, x] = set[r, x].Except(g2.ElementAt(i).set).ToHashSet();
+                            }
+
+                            ////fjern fra col
+                            //for (int y = 0; y < 9; y++)
+                            //{
+                            //    if (set[y, c] != null)
+                            //        set[y, c] = set[y, c].Except(g2.ElementAt(i).set).ToHashSet();
+                            //}
+
+                        }
+
+                        for (int i = 0; i < 2; i++)
+                        {
+                            int r = g2.ElementAt(i).row;
+                            int c = g2.ElementAt(i).col;
+                            int box = GetBox(r, c);
+                            //set[r, c] = g2.ElementAt(i).set;
+                            set[r, c] = copy;
+                            //                       t = true;
+                        }
+
+                    }
+
+                }
+            }
+
+
+
+
+
+
+            foreach (var g in list.GroupBy(l => l.col))
+            {
+                foreach (var g2 in g.GroupBy(h => h.first))
+                {
+
+                    if (g2.Count() == 2 && g2.ElementAt(0).second == g2.ElementAt(1).second)
+                    {
+                        var copy = new HashSet<int>()
+                        {
+                            g2.ElementAt(0).first,
+                            g2.ElementAt(0).second,
+
+                        };
+                        //fjern alle andre fra row,col.box
+                        for (int i=0;i<2;i++)
+                        {
+                            int r=g2.ElementAt(i).row;
+                            int c = g2.ElementAt(i).col;
+                            int box = GetBox(r,c);
+                            //fjern fra row
+                            //for(int x=0;x<9;x++)
+                            //{
+                            //   if (r==0 && x==8)
+                            //    {
+                            //        var d = 1;
+                            //    }  
+                            //   if (set[r, x] != null)
+                            //           set[r, x] = set[r, x].Except(g2.ElementAt(i).set).ToHashSet();
+                            //}
+                          
+                            //fjern fra col
+                            for (int y = 0; y < 9; y++)
+                            {
+                                if (set[y, c] != null)
+                                    set[y, c] = set[y, c].Except(g2.ElementAt(i).set).ToHashSet();
+                            }
+                          
+                        }
+
+                        for (int i = 0; i < 2; i++)
+                        {
+                            int r = g2.ElementAt(i).row;
+                            int c = g2.ElementAt(i).col;
+                            int box = GetBox(r, c);
+                            //set[r, c] = g2.ElementAt(i).set;
+                            set[r, c] = copy;
+                             //                       t = true;
+                        }
+
+                    
+
+
+
+                    }
+
+                }
+            }
+
+            foreach (var g in list.GroupBy(l => l.box))
+            {
+                foreach (var g2 in g.GroupBy(h => h.first))
+                {
+
+                    if (g2.Count() == 2 && g2.ElementAt(0).second == g2.ElementAt(1).second)
+                    {
+                        var a = 1;
+
+                    }
+
+                }
+            }
+
+
+
+            return t;
+        }
+
+
+        private int GetBox(int row,int col)
+        {
+            int rowstart = (row / 3) ;
+            int colstart = (col / 3);
+            int box = rowstart*3+ colstart;
+            return box;
+        }
+
+
         private int GetUnsolved(int[][] sudoku)
         {
             int unsolved = 0;
@@ -173,5 +370,22 @@ namespace jae.euler.lib
             }
             return unsolved;
         }
+
+
+        private void RecursiveTry(int[][] currentSudoku)
+        {
+            //make copy first
+            int[][] sudoku = new int[9][];
+
+            for (int i = 0; i < 9; i++)
+            {
+                sudoku[i] = currentSudoku[i].ToArray();
+            }
+
+            HashSet<int>[,] set = InitHashSet(sudoku);
+
+
+        }
+
     }
 }
