@@ -18,6 +18,30 @@ namespace jae.euler.lib
         public int col { get; set; }
       }
 
+
+    public struct Cell
+    {
+        public int y { get; set; }
+        public int x { get; set; }
+    }
+
+
+    public class CellBox
+    {
+        public int rowstart ;
+        public int rowend;
+        public int colstart;
+        public int colend;
+        public CellBox(int i)
+        {
+            rowstart = (i/3) *3;   
+            rowend = rowstart + 3;
+            colstart = (i % 3) * 3;
+            colend = colstart + 3;
+        }
+    }
+
+
     public class E096SuDoku
     {
         public int GetTopLeftCorner(int[][] sudoku)
@@ -88,7 +112,7 @@ namespace jae.euler.lib
 
             //if (Test1(set))
             //    return 1;
-
+           Test2(set);
             Test1(set);
             
 
@@ -187,6 +211,129 @@ namespace jae.euler.lib
         }
 
 
+        private bool Test2(HashSet<int>[,] set)
+        {
+
+            for(int row=0;row<9;row++)
+            {
+                int[] teller = new int[10];
+                for(int x=0;x<9;x++)
+                {
+                    if (set[row, x] != null)
+                    {
+                        foreach(int t in (set[row, x]))
+                        {
+                            teller[t]++;
+                        }
+                    }
+                }
+
+                if ( teller.Any(i=>i==1)) {
+                    int t = 0;
+                    while (teller[t] != 1) t++;
+                    for (int x = 0; x < 9; x++)
+                    {
+                        if (set[row, x] != null && set[row, x].Contains(t))
+                        {
+                            set[row, x] = new HashSet<int>() { t };
+                        }
+                    }
+
+
+                }
+
+
+            } //row
+
+     
+
+            for (int col = 0; col < 9; col++)
+            {
+                int[] teller = new int[10];
+                for (int y = 0; y < 9; y++)
+                {
+                    if (set[y, col] != null)
+                    {
+                        foreach (int t in (set[y, col]))
+                        {
+                            teller[t]++;
+                        }
+                    }
+                }
+
+                if (teller.Any(i => i == 1))
+                {
+                    int t = 0;
+                    while (teller[t] != 1) t++;
+                    for (int y = 0; y < 9; y++)
+                    {
+                        if (set[y, col] != null && set[y, col].Contains(t))
+                        {
+                            set[y, col] = new HashSet<int>() { t };
+                        }
+                    }
+
+
+                }
+
+
+            } //row
+
+            //box
+       
+            for (int box=0;box<9;box++)
+            {
+                var cellbox = new CellBox(box);
+                int[] teller = new int[10];
+
+                for (int row = cellbox.rowstart; row < cellbox.rowend; row++)
+                {
+                    for (int col = cellbox.colstart; col < cellbox.colend; col++)
+                    {
+                        if (set[row, col] != null)
+                        {
+                            foreach (int t in (set[row, col]))
+                            {
+                                teller[t]++;
+                            }
+                        }
+
+                    }
+                }
+
+                if (teller.Any(i => i == 1))
+                {
+                    int t = 0;
+                    while (teller[t] != 1) t++;
+
+                    for (int row = cellbox.rowstart; row < cellbox.rowend; row++)
+                    {
+                        for (int col = cellbox.colstart; col < cellbox.colend; col++)
+                        {
+                            if (set[row, col] != null && set[row, col].Contains(t))
+                            {
+                                set[row, col] = new HashSet<int>() { t };
+                            }
+
+                        }
+                    }
+
+                  
+
+
+                }
+
+            }
+
+
+                return true;
+
+        }
+
+
+
+
+
         private bool Test1(HashSet<int>[,] set)
         {
             bool t = false;
@@ -213,7 +360,7 @@ namespace jae.euler.lib
                 foreach (var g2 in g.GroupBy(h => h.first))
                 {
 
-                    if (g2.Count() == 2 && g2.ElementAt(0).second == g2.ElementAt(1).second)
+                    if (g.Count() >=3 &&  g2.Count() == 2 && g2.ElementAt(0).second == g2.ElementAt(1).second)
                     {
                         var copy = new HashSet<int>()
                         {
@@ -272,7 +419,7 @@ namespace jae.euler.lib
                 foreach (var g2 in g.GroupBy(h => h.first))
                 {
 
-                    if (g2.Count() == 2 && g2.ElementAt(0).second == g2.ElementAt(1).second)
+                    if (g.Count() >= 3 && g2.Count() == 2 && g2.ElementAt(0).second == g2.ElementAt(1).second)
                     {
                         var copy = new HashSet<int>()
                         {
@@ -330,11 +477,48 @@ namespace jae.euler.lib
                 foreach (var g2 in g.GroupBy(h => h.first))
                 {
 
-                    if (g2.Count() == 2 && g2.ElementAt(0).second == g2.ElementAt(1).second)
+                    if (g.Count() >= 3 && g2.Count() == 2 && g2.ElementAt(0).second == g2.ElementAt(1).second)
                     {
                         var a = 1;
+                        var copy = new HashSet<int>()
+                        {
+                            g2.ElementAt(0).first,
+                            g2.ElementAt(0).second,
+
+                        };
+
+                        if (  g.Count()>3)
+                        {
+                            var wwwwa = 1;
+                        }
+
+                        int box = GetBox(g2.ElementAt(0).row,g2.ElementAt(0).col);
+                        var cellbox = new CellBox(box);
+
+                        for (int row = cellbox.rowstart; row < cellbox.rowend; row++)
+                        {
+                            for (int col = cellbox.colstart; col < cellbox.colend; col++)
+                            {
+                                if (set[row, col] != null)
+                                {
+                                    if (set[row, col] != null)
+                                        set[row, col] = set[row, col].Except(copy).ToHashSet();
+                                }
+                            }
+
+                        }
+
+                        //fjern alle andre fra row,col.box
+
+
+                        for (int i = 0; i < 2; i++)
+                        {
+                            set[g2.ElementAt(i).row, g2.ElementAt(i).col] = copy;
+                        }
+
 
                     }
+
 
                 }
             }

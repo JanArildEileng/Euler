@@ -57,6 +57,20 @@ namespace jae.euler.test.level04
         }
 
 
+        [Fact]
+        public void Test_Grid6()
+        {
+            /*
+                483 is the 3-digit number found in the top left corner of the solution grid above.
+            */
+
+            var sudokus = GetSudokusFromFile();
+            var sut = new E096SuDoku();
+            Assert.Equal(483, sut.GetTopLeftCorner(sudokus[5]));
+
+        }
+
+
 
         [Fact]
         public void Solution()
