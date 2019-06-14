@@ -10,12 +10,18 @@ namespace jae.euler.lib
     {
         public int Max { get; set; }
         Dictionary<long,long> primeDictionary;
+        List<long> primeliste;
 
         public E357PrimeGeneratingIntegers(int Max)
         {
             this.Max = Max;
+//            primeliste=Primes.GetPrimeFactorsBelowNumber((long)Math.Sqrt(Max));
+//            primeDictionary = Primes.GetPrimeFactorsBelowNumber((long)Math.Sqrt(Max)).ToDictionary(e=>e);
+            primeliste = Primes.GetPrimeFactorsBelowNumber(Max+1);
 
-            primeDictionary = Primes.GetPrimeFactorsBelowNumber((long)(Max+2)).ToDictionary(e=>e);
+            primeDictionary = primeliste.ToDictionary(e => e);
+
+            primeDictionary.Add(1, 1);
 
         }
 
@@ -25,21 +31,51 @@ namespace jae.euler.lib
          */    
         public bool IsPrimeGenerating(long number)
         {
+            if (number % 2 == 1) return false;
+
             List<long> divisors = Divisors.GetAllUniqueDivisorsIn(number);
-            List<long> liste = divisors.Select(d => d + number / d).Distinct().ToList();
 
 
-            return liste.All(d => primeDictionary.ContainsKey(d));
+            int len = divisors.Count();
+            if (len % 2 == 1) return false;
+
+            //if (len == 2)
+            //    return !primeDictionary.ContainsKey(number);
+
+
+            //  List<long> liste = divisors.Select(d => d + number / d).Distinct().ToList();
+            List<long> liste = divisors.Take(len/2).Select(d => d + number / d).Distinct().ToList();
+            // List<long> liste = divisors.Take(len/2).ToList();
+
+          //  return liste.All(d => Primes.IsPrime(d, primeliste));
+     
+          //  return liste.All(d => primeDictionary.ContainsKey(d));
+
+
+                      return liste.All(d => primeDictionary.ContainsKey(d));
         }
 
         public long GetSumOfAllPositiveIntegers()
         {
             long sumOfAllPositiveIntegers = 0;
 
+            List<long> liste = new List<long>();
+
+            IsPrimeGenerating(Max);
+
+
             for (long i=1;i< Max;i++)
             {
                 if (IsPrimeGenerating(i))
+                {
+                    if (sumOfAllPositiveIntegers + i > 100000000)
+                        return sumOfAllPositiveIntegers;
+
                     sumOfAllPositiveIntegers += i;
+
+
+                    liste.Add(i);
+                }
 
             }
 
