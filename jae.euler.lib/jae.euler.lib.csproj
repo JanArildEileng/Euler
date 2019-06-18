@@ -14,8 +14,4 @@
     <ProjectReference Include="..\jae.euler.math\jae.euler.math.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="E101-E200\" />
-  </ItemGroup>
-
 </Project>
