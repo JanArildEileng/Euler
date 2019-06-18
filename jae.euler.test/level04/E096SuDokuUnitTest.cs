@@ -8,38 +8,33 @@ namespace jae.euler.test.level04
 {
     public class E096SuDokuUnitTest
     {
-/*
-        Grid 01
-003020600
-900305001
-001806400
-008102900
-700000008
-006708200
-002609500
-800203009
-005010300
-*/
 
-        private List<int[][]> GetSudokusFromFile()
+        private List<SudokuBrett> GetSuDokuBrettFromFile()
         {
-            List<int[][]> sudokoListe = new List<int[][]>();
-            var file= File.OpenText("DataFiles\\p096_sudoku.txt");
-            for (int grid=1;grid<=50;grid++)
+            List<SudokuBrett> sudokoListe = new List<SudokuBrett>();
+            var file = File.OpenText("DataFiles\\p096_sudoku.txt");
+            for (int grid = 1; grid <= 50; grid++)
             {
                 file.ReadLine();
-                int[][] sudoko = new int[9][];
-
-                for (int i=0;i<9;i++)
+           
+                int[][] initValues = new int[9][];
+                for (int i = 0; i < 9; i++)
                 {
-                   var line=file.ReadLine();
-                    sudoko[i] = line.ToCharArray().Select(c => c - '0').ToArray<int>();
+                    initValues[i] = file.ReadLine().ToCharArray().Select(c => c - '0').ToArray<int>();
                 }
 
-                sudokoListe.Add(sudoko);
+                sudokoListe.Add(new SudokuBrett(initValues));
             }
 
             return sudokoListe;
+        }
+
+
+        [Fact]
+        public void Test_SukdoBrett()
+        {
+            var sudokuBrettListe = GetSuDokuBrettFromFile();
+            Assert.Equal(50, sudokuBrettListe.Count());
         }
 
 
@@ -50,10 +45,9 @@ namespace jae.euler.test.level04
                 483 is the 3-digit number found in the top left corner of the solution grid above.
             */
 
-            var sudokus = GetSudokusFromFile();
-            var sut = new E096SuDoku();
-            Assert.Equal(483, sut.GetTopLeftCorner(sudokus[0]));
-
+           var sudokuBrettListe = GetSuDokuBrettFromFile();
+           var sut = new E096SuDoku();
+           Assert.Equal(483, sut.Solve(sudokuBrettListe[0],0).GetTopLeftCornerValue());
         }
 
 
@@ -64,12 +58,52 @@ namespace jae.euler.test.level04
                 483 is the 3-digit number found in the top left corner of the solution grid above.
             */
 
-            var sudokus = GetSudokusFromFile();
+            var sudokuBrettListe = GetSuDokuBrettFromFile();
             var sut = new E096SuDoku();
-            Assert.Equal(483, sut.GetTopLeftCorner(sudokus[5]));
+            Assert.Equal(176, sut.Solve(sudokuBrettListe[5],0).GetTopLeftCornerValue());
 
         }
 
+
+        [Fact]
+        public void Test_Grid25()
+        {
+            /*
+                483 is the 3-digit number found in the top left corner of the solution grid above.
+            */
+
+            var sudokuBrettListe = GetSuDokuBrettFromFile();
+            var sut = new E096SuDoku();
+            Assert.Equal(361, sut.Solve(sudokuBrettListe[24], 0).GetTopLeftCornerValue());
+
+        }
+
+        [Fact]
+        public void Test_Grid10()
+        {
+            /*
+                483 is the 3-digit number found in the top left corner of the solution grid above.
+            */
+
+            var sudokuBrettListe = GetSuDokuBrettFromFile();
+            var sut = new E096SuDoku();
+            Assert.Equal(761, sut.Solve(sudokuBrettListe[9], 0).GetTopLeftCornerValue());
+
+        }
+
+
+        [Fact]
+        public void Test_Grid50()
+        {
+            /*
+                483 is the 3-digit number found in the top left corner of the solution grid above.
+            */
+
+            var sudokuBrettListe = GetSuDokuBrettFromFile();
+            var sut = new E096SuDoku();
+            Assert.Equal(351, sut.Solve(sudokuBrettListe[49], 0).GetTopLeftCornerValue());
+
+        }
 
 
         [Fact]
@@ -80,13 +114,17 @@ namespace jae.euler.test.level04
               
             483 is the 3-digit number found in the top left corner of the solution grid above.
             */
-            var sudokus = GetSudokusFromFile();
+            var sudokuBrettListe = GetSuDokuBrettFromFile();
             var sut = new E096SuDoku();
-            Assert.Equal(-1, sut.GetSumTopLeftCorner(sudokus));
+            Assert.Equal(24702, sut.SolveAll(sudokuBrettListe));
 
 
             /*
-                
+                Congratulations, the answer you gave to problem 96 is correct.
+
+                You are the 14777th person to have solved this problem.
+
+                This problem had a difficulty rating of 25%. 
             */
         }
     }
