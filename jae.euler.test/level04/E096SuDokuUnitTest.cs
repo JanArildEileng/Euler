@@ -47,7 +47,7 @@ namespace jae.euler.test.level04
 
            var sudokuBrettListe = GetSuDokuBrettFromFile();
            var sut = new E096SuDoku();
-           Assert.Equal(483, sut.Solve(sudokuBrettListe[0],0).GetTopLeftCornerValue());
+           Assert.Equal(483, sut.Solve(sudokuBrettListe[0]).GetTopLeftCornerValue());
         }
 
 
@@ -60,7 +60,7 @@ namespace jae.euler.test.level04
 
             var sudokuBrettListe = GetSuDokuBrettFromFile();
             var sut = new E096SuDoku();
-            Assert.Equal(176, sut.Solve(sudokuBrettListe[5],0).GetTopLeftCornerValue());
+            Assert.Equal(176, sut.Solve(sudokuBrettListe[5]).GetTopLeftCornerValue());
 
         }
 
@@ -74,7 +74,7 @@ namespace jae.euler.test.level04
 
             var sudokuBrettListe = GetSuDokuBrettFromFile();
             var sut = new E096SuDoku();
-            Assert.Equal(361, sut.Solve(sudokuBrettListe[24], 0).GetTopLeftCornerValue());
+            Assert.Equal(361, sut.Solve(sudokuBrettListe[24]).GetTopLeftCornerValue());
 
         }
 
@@ -87,7 +87,7 @@ namespace jae.euler.test.level04
 
             var sudokuBrettListe = GetSuDokuBrettFromFile();
             var sut = new E096SuDoku();
-            Assert.Equal(761, sut.Solve(sudokuBrettListe[9], 0).GetTopLeftCornerValue());
+            Assert.Equal(761, sut.Solve(sudokuBrettListe[9]).GetTopLeftCornerValue());
 
         }
 
@@ -101,7 +101,7 @@ namespace jae.euler.test.level04
 
             var sudokuBrettListe = GetSuDokuBrettFromFile();
             var sut = new E096SuDoku();
-            Assert.Equal(351, sut.Solve(sudokuBrettListe[49], 0).GetTopLeftCornerValue());
+            Assert.Equal(351, sut.Solve(sudokuBrettListe[49]).GetTopLeftCornerValue());
 
         }
 
@@ -121,9 +121,7 @@ namespace jae.euler.test.level04
 
             /*
                 Congratulations, the answer you gave to problem 96 is correct.
-
                 You are the 14777th person to have solved this problem.
-
                 This problem had a difficulty rating of 25%. 
             */
         }
