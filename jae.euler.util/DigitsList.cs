@@ -109,6 +109,37 @@ namespace jae.euler.util
 
         }
 
+        public static List<int> Add1(List<int> numbers1)
+        {
+            int i = 0;
+            int v = numbers1[i] + 1;
+
+            numbers1[i] = v % 10;
+            int rest = v / 10;
+
+            while ( rest > 0)
+            {
+                i++;
+                if  (numbers1.Count >i )
+                {
+                     v = numbers1[i] + rest;
+                     numbers1[i] = v % 10;
+                     rest = v / 10;
+                } else
+                {
+                    numbers1.Add(rest);
+                    rest = 0;
+                }
+
+            
+            }
+
+            return numbers1;
+
+        }
+
+
+
 
         public static List<int> Substract(List<int> numbers1, List<int> numbers2)
         {
