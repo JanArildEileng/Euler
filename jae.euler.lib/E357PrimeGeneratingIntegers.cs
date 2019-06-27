@@ -33,15 +33,36 @@ namespace jae.euler.lib
         {
             if (number % 2 == 1) return false;
 
+
+/*
+            for (long divisor1 = 2; divisor1 < number; divisor1++)
+            {
+                long divisor2 = number / divisor1;
+                if (divisor1 > divisor2) return true;
+
+                if (number % divisor1 == 0 )
+                {
+                  
+
+
+                    if (!primeDictionary.ContainsKey(divisor1 + divisor2)) return false;
+                }
+
+
+            }
+
+            return true;
+*/
+
             List<long> divisors = Divisors.GetAllUniqueDivisorsIn(number);
-
-
+          
             int len = divisors.Count();
             if (len % 2 == 1) return false;
 
             //if (len == 2)
             //    return !primeDictionary.ContainsKey(number);
 
+         
 
             //  List<long> liste = divisors.Select(d => d + number / d).Distinct().ToList();
             List<long> liste = divisors.Take(len/2).Select(d => d + number / d).Distinct().ToList();
@@ -59,8 +80,6 @@ namespace jae.euler.lib
         {
             long sumOfAllPositiveIntegers = 0;
 
-            List<long> liste = new List<long>();
-
             IsPrimeGenerating(Max);
 
 
@@ -68,13 +87,34 @@ namespace jae.euler.lib
             {
                 if (IsPrimeGenerating(i))
                 {
-                    if (sumOfAllPositiveIntegers + i > 100000000)
-                        return sumOfAllPositiveIntegers;
+                   
+                    sumOfAllPositiveIntegers += i;
+
+                }
+
+            }
+
+            return sumOfAllPositiveIntegers;
+        }
+
+
+
+
+
+        public long GetSumOfAllPositiveIntegers_org()
+        {
+            long sumOfAllPositiveIntegers = 0;
+
+            IsPrimeGenerating(Max);
+
+
+            for (long i = 1; i < Max; i++)
+            {
+                if (IsPrimeGenerating(i))
+                {
 
                     sumOfAllPositiveIntegers += i;
 
-
-                    liste.Add(i);
                 }
 
             }

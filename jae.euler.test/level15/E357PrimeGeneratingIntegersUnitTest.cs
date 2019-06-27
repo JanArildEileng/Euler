@@ -13,6 +13,11 @@ namespace jae.euler.test.level15
         [InlineData(22)]
         [InlineData(30)]
         [InlineData(42)]
+        [InlineData(210)] //7
+        [InlineData(2310)] //11
+        [InlineData(30030)] //13
+
+
         [InlineData(1282)]
         public void Test_ISPrimeGenerating(int number)
         {
@@ -51,7 +56,7 @@ namespace jae.euler.test.level15
                 such that for every divisor d of n, d+n/d is prime.
             */
 
-            var sut = new E357PrimeGeneratingIntegers(Max: 1000000);
+            var sut = new E357PrimeGeneratingIntegers(Max: 30000000);
             Assert.Equal(-1, sut.GetSumOfAllPositiveIntegers());
 
             /*
