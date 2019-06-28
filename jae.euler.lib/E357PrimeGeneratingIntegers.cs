@@ -15,9 +15,9 @@ namespace jae.euler.lib
         public E357PrimeGeneratingIntegers(int Max)
         {
             this.Max = Max;
-//            primeliste=Primes.GetPrimeFactorsBelowNumber((long)Math.Sqrt(Max));
-//            primeDictionary = Primes.GetPrimeFactorsBelowNumber((long)Math.Sqrt(Max)).ToDictionary(e=>e);
-            primeliste = Primes.GetPrimeFactorsBelowNumber(Max+1);
+            primeliste=Primes.GetPrimeFactorsBelowNumber((long)Math.Sqrt(Max));
+///            primeDictionary = Primes.GetPrimeFactorsBelowNumber((long)Math.Sqrt(Max)).ToDictionary(e=>e);
+//            primeliste = Primes.GetPrimeFactorsBelowNumber(Max+1);
 
             primeDictionary = primeliste.ToDictionary(e => e);
 
@@ -62,10 +62,13 @@ namespace jae.euler.lib
             //if (len == 2)
             //    return !primeDictionary.ContainsKey(number);
 
-         
+             if (number==442)
+            {
+                var aa = 1;
+            }
 
             //  List<long> liste = divisors.Select(d => d + number / d).Distinct().ToList();
-            List<long> liste = divisors.Take(len/2).Select(d => d + number / d).Distinct().ToList();
+            List<long> liste = divisors.Take(len).Select(d => d + number / d).Distinct().ToList();
             // List<long> liste = divisors.Take(len/2).ToList();
 
           //  return liste.All(d => Primes.IsPrime(d, primeliste));
@@ -80,21 +83,44 @@ namespace jae.euler.lib
         {
             long sumOfAllPositiveIntegers = 0;
 
-            IsPrimeGenerating(Max);
+            Action<long> action = (i) =>
+              {
+                  sumOfAllPositiveIntegers += i;
+              };
 
 
-            for (long i=1;i< Max;i++)
-            {
-                if (IsPrimeGenerating(i))
-                {
-                   
-                    sumOfAllPositiveIntegers += i;
 
-                }
 
-            }
+            sumOfAllPositiveIntegers = Recursive().Sum();
 
             return sumOfAllPositiveIntegers;
+        }
+
+
+        private List<long> Recursive()
+        {
+            int count = primeliste.Count;
+            List<long> liste = new List<long>() {  };
+          
+
+
+            for (int i= 1; i < count;i++)
+            {
+                long prime = primeliste[i];
+                long test =  prime-1;
+                if (test > Max) continue;
+
+                if (!primeDictionary.ContainsKey(test/2 + 2)) continue;
+
+                if (IsPrimeGenerating(test))
+                {
+                    liste.Add(test);
+                }
+            }
+          
+
+            var l = liste.OrderBy(e => e);
+            return liste;
         }
 
 
@@ -104,21 +130,15 @@ namespace jae.euler.lib
         public long GetSumOfAllPositiveIntegers_org()
         {
             long sumOfAllPositiveIntegers = 0;
-
-            IsPrimeGenerating(Max);
-
-
+         
             for (long i = 1; i < Max; i++)
             {
                 if (IsPrimeGenerating(i))
                 {
 
                     sumOfAllPositiveIntegers += i;
-
                 }
-
             }
-
             return sumOfAllPositiveIntegers;
         }
     }
