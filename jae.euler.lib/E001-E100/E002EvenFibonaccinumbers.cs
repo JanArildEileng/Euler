@@ -9,7 +9,7 @@ namespace jae.euler.lib
         public long SumEven(long below)
         {
             Fibonacci fibonacci = new Fibonacci();
-            return fibonacci.Iterastor(below).Where(e => e.Even()).Sum();
+            return fibonacci.Iterator(below).Where(e => e.Even()).Sum();
 
         }
 

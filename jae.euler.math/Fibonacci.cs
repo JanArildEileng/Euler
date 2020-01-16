@@ -6,24 +6,22 @@ namespace jae.euler.math
 {
     public class Fibonacci
     {
-
-        public IEnumerable<long> Iterastor(long max)
+        public IEnumerable<long> Iterator(long below)
         {
-            long n1 = 1;
-            long n2 = 1;
-
+           (long n1, long n2) = next(1, 0);
             yield return n1;
-            yield return n2;
 
-            while (true)
+            while (n2 <below )
             {
-                long next = n1 + n2;
-                n1 = n2;
-                n2 = next;
-
-                if (next > max) yield  break;
-                yield return next;
+                yield return n2;
+                (n1, n2) = next(n1, n2);
             }
         }
+
+        (long n1,long n2) next(long n1,long n2)
+        {
+            return (n2, n2 + n1);
+        }
+
     }
 }
