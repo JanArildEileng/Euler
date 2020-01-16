@@ -5,33 +5,19 @@ using Xunit;
 namespace jae.euler.test.level01
 {
     public class E003LargestprimefactorUnitTest
-
     {
-        [Fact]
-        public void Test1()
+        [Theory]
+        [InlineData(3,3)]
+        [InlineData(5, 5)]
+        [InlineData(10, 5)]
+        // The prime factors of 13195 are 5, 7, 13 and 29.
+        [InlineData(13195, 29)]
+        public void Test1(long number,long expectedlargestPrime)
         {
-            // The prime factors of 13195 are 5, 7, 13 and 29.
-
             var sut = new E003Largestprimefactor();
 
-            var max = sut.Largest(3);
-            Assert.Equal(3, max);
-
-            max = sut.Largest(4);
-            Assert.Equal(2, max);
-
-            max = sut.Largest(5);
-            Assert.Equal(5, max);
-
-            max = sut.Largest(10);
-            Assert.Equal(5, max);
-
-
-
-            max = sut.Largest(13195);
-            Assert.Equal(29, max);
-
-
+            var largestPrim = sut.Largest(number);
+            Assert.Equal(expectedlargestPrime, largestPrim);
         }
 
         [Fact]

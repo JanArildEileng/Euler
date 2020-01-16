@@ -8,24 +8,25 @@ namespace jae.euler.math
     {
         public static List<long> GetPrimeFactorsInNumber(long number)
         {
-            List<long> primeList = new List<long>();
+            var primeList= new List<long>{};
 
-            var rest = number;
-            var current = 2;
-
-            while (current <= rest)
+            long primeCandidate = 2;
+            while (number % primeCandidate == 0)
             {
-                if (rest % current == 0)
-                {
-                    primeList.Add(current);
-                    rest = rest / current;
-                }
-                else
-                {
-                    current++;
-                }
+                primeList.Add(primeCandidate);
+                number /= primeCandidate;
             }
 
+            primeCandidate = 3;
+            while (number >= primeCandidate)
+            {
+                while (number % primeCandidate == 0)
+                {
+                    primeList.Add(primeCandidate);
+                    number /= primeCandidate;
+                }
+                primeCandidate += 2;
+            }
             return primeList;
         }
 
