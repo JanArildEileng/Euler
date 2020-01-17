@@ -6,43 +6,36 @@ using System.Linq;
 using jae.euler.math;
 
 namespace jae.euler.lib
-{
+{ 
+
+    
+
+
     public class E004Largestpalindromeproduct
     {
-        public long Largest(long below,long maxFactor)
+        public long Largest(long maxFactor)
         {
-             
-            long found = Palindrome.PreviousPalindrome(below);
+            long largestpalindromeFound = -1;
 
-            while ( !isProduct(found, maxFactor) && found >0  )
+            for (long i1 = maxFactor - 1; i1 > 0; i1--)
             {
-                found--;
+                if (i1 * i1 < largestpalindromeFound) break;
 
-                found = Palindrome.PreviousPalindrome(found);
-            }
-
-            return found;
-        }
-
-        private bool isProduct(long found,long maxFactor)
-        {
-
-            for (var i= maxFactor-1; i > 1; i--)
-            {
-                if ( found % i ==0)
+                for (long i2 = i1; i2 > 0; i2--)
                 {
-                    var rest = found / i;
-                    if (rest < maxFactor) return true;
+                    long currentProduct = i1 * i2;
+                    if (currentProduct > largestpalindromeFound)
+                    {
+                        if (Palindrome.IsPalindrome(currentProduct))
+                            largestpalindromeFound = currentProduct;
+                    }
                     else
-                        return false;
+                        break;
                 }
-
             }
- 
-            return false;
-         }
 
-      
+            return largestpalindromeFound;
+        }
 
     }
 }
