@@ -1,16 +1,7 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using jae.euler.math;
+﻿using jae.euler.math;
 
 namespace jae.euler.lib
 { 
-
-    
-
-
     public class E004Largestpalindromeproduct
     {
         public long Largest(long maxFactor)
@@ -36,6 +27,5 @@ namespace jae.euler.lib
 
             return largestpalindromeFound;
         }
-
     }
 }
